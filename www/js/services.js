@@ -1,1 +1,282 @@
-myApp.services={tasks:{create:function(e){var i=ons.createElement('<ons-list-item tappable category="'+myApp.services.categories.parseId(e.category)+'"><label class="left"><ons-checkbox></ons-checkbox></label><div class="center">'+e.title+'</div><div class="right"><ons-icon style="color: grey; padding-left: 4px" icon="ion-ios-trash-outline, material:md-delete"></ons-icon></div></ons-list-item>');i.data=e,i.data.onCheckboxChange=function(t){myApp.services.animators.swipe(i,function(){var e="pending-list"===i.parentElement.id&&t.target.checked?"#completed-list":"#pending-list";document.querySelector(e).appendChild(i)})},i.addEventListener("change",i.data.onCheckboxChange),i.querySelector(".right").onclick=function(){myApp.services.tasks.remove(i)},i.querySelector(".center").onclick=function(){document.querySelector("#myNavigator").pushPage("html/details_task.html",{animation:"lift",data:{element:i}})},myApp.services.categories.updateAdd(i.data.category),i.data.highlight&&i.classList.add("highlight");var t=document.querySelector("#pending-list");t.insertBefore(i,i.data.urgent?t.firstChild:null)},update:function(e,t){t.title!==e.data.title&&(e.querySelector(".center").innerHTML=t.title),t.category!==e.data.category&&(e.setAttribute("category",myApp.services.categories.parseId(t.category)),myApp.services.categories.updateAdd(t.category),myApp.services.categories.updateRemove(e.data.category)),e.classList[t.highlight?"add":"remove"]("highlight"),e.data=t},remove:function(e){e.removeEventListener("change",e.data.onCheckboxChange),myApp.services.animators.remove(e,function(){e.remove(),myApp.services.categories.updateRemove(e.data.category)})}},categories:{create:function(e){var t=myApp.services.categories.parseId(e),i=ons.createElement('<ons-list-item tappable category-id="'+t+'"><div class="left"><ons-radio name="categoryGroup" input-id="radio-'+t+'"></ons-radio></div><label class="center" for="radio-'+t+'">'+(e||"No category")+"</label></ons-list-item>");myApp.services.categories.bindOnCheckboxChange(i),document.querySelector("#custom-category-list").appendChild(i)},updateAdd:function(e){var t=myApp.services.categories.parseId(e);document.querySelector('#menuPage ons-list-item[category-id="'+t+'"]')||myApp.services.categories.create(e)},updateRemove:function(e){var t=myApp.services.categories.parseId(e);document.querySelector('#tabbarPage ons-list-item[category="'+t+'"]')||myApp.services.categories.remove(document.querySelector('#custom-category-list ons-list-item[category-id="'+t+'"]'))},remove:function(e){e&&(e.removeEventListener("change",e.updateCategoryView),e.remove())},bindOnCheckboxChange:function(e){var i=e.getAttribute("category-id"),r=null===i;e.updateCategoryView=function(){for(var e=document.querySelectorAll("#tabbarPage ons-list-item"),t=0;t<e.length;t++)e[t].style.display=r||e[t].getAttribute("category")===i?"":"none"},e.addEventListener("change",e.updateCategoryView)},parseId:function(e){return e?e.replace(/\s\s+/g," ").toLowerCase():""}},animators:{swipe:function(e,t){var i="pending-list"===e.parentElement.id?"animation-swipe-right":"animation-swipe-left";e.classList.add("hide-children"),e.classList.add(i),setTimeout(function(){e.classList.remove(i),e.classList.remove("hide-children"),t()},950)},remove:function(e,t){e.classList.add("animation-remove"),e.classList.add("hide-children"),setTimeout(function(){t()},750)}},fixtures:[{title:"Download OnsenUI",category:"Programming",description:"Some description.",highlight:!1,urgent:!1},{title:"Install Monaca CLI",category:"Programming",description:"Some description.",highlight:!1,urgent:!1},{title:"Star Onsen UI repo on Github",category:"Super important",description:"Some description.",highlight:!1,urgent:!1},{title:"Register in the community forum",category:"Super important",description:"Some description.",highlight:!1,urgent:!1},{title:"Send donations to Fran and Andreas",category:"Super important",description:"Some description.",highlight:!1,urgent:!1},{title:"Profit",category:"",description:"Some description.",highlight:!1,urgent:!1},{title:"Visit Japan",category:"Travels",description:"Some description.",highlight:!1,urgent:!1},{title:"Enjoy an Onsen with Onsen UI team",category:"Personal",description:"Some description.",highlight:!1,urgent:!1}]};
+/***********************************************************************************
+ * App Services. This contains the logic of the application organised in modules/objects. *
+ ***********************************************************************************/
+
+myApp.services = {
+
+  /////////////////
+  // Task Service //
+  /////////////////
+  tasks: {
+
+    // Creates a new task and attaches it to the pending task list.
+    create: function(data) {
+      // Task item template.
+      var taskItem = ons.createElement(
+        '<ons-list-item tappable category="' + myApp.services.categories.parseId(data.category)+ '">' +
+          '<label class="left">' +
+           '<ons-checkbox></ons-checkbox>' +
+          '</label>' +
+          '<div class="center">' +
+            data.title +
+          '</div>' +
+          '<div class="right">' +
+            '<ons-icon style="color: grey; padding-left: 4px" icon="ion-ios-trash-outline, material:md-delete"></ons-icon>' +
+          '</div>' +
+        '</ons-list-item>'
+      );
+
+      // Store data within the element.
+      taskItem.data = data;
+
+      // Add 'completion' functionality when the checkbox changes.
+      taskItem.data.onCheckboxChange = function(event) {
+        myApp.services.animators.swipe(taskItem, function() {
+          var listId = (taskItem.parentElement.id === 'pending-list' && event.target.checked) ? '#completed-list' : '#pending-list';
+          document.querySelector(listId).appendChild(taskItem);
+        });
+      };
+
+      taskItem.addEventListener('change', taskItem.data.onCheckboxChange);
+
+      // Add button functionality to remove a task.
+      taskItem.querySelector('.right').onclick = function() {
+        myApp.services.tasks.remove(taskItem);
+      };
+
+      // Add functionality to push 'details_task.html' page with the current element as a parameter.
+      taskItem.querySelector('.center').onclick = function() {
+        document.querySelector('#myNavigator')
+          .pushPage('html/details_task.html',
+            {
+              animation: 'lift',
+              data: {
+                element: taskItem
+              }
+            }
+          );
+      };
+
+      // Check if it's necessary to create new categories for this item.
+      myApp.services.categories.updateAdd(taskItem.data.category);
+
+      // Add the highlight if necessary.
+      if (taskItem.data.highlight) {
+        taskItem.classList.add('highlight');
+      }
+
+      // Insert urgent tasks at the top and non urgent tasks at the bottom.
+      var pendingList = document.querySelector('#pending-list');
+      pendingList.insertBefore(taskItem, taskItem.data.urgent ? pendingList.firstChild : null);
+    },
+
+    // Modifies the inner data and current view of an existing task.
+    update: function(taskItem, data) {
+      if (data.title !== taskItem.data.title) {
+        // Update title view.
+        taskItem.querySelector('.center').innerHTML = data.title;
+      }
+
+      if (data.category !== taskItem.data.category) {
+        // Modify the item before updating categories.
+        taskItem.setAttribute('category', myApp.services.categories.parseId(data.category));
+        // Check if it's necessary to create new categories.
+        myApp.services.categories.updateAdd(data.category);
+        // Check if it's necessary to remove empty categories.
+        myApp.services.categories.updateRemove(taskItem.data.category);
+
+      }
+
+      // Add or remove the highlight.
+      taskItem.classList[data.highlight ? 'add' : 'remove']('highlight');
+
+      // Store the new data within the element.
+      taskItem.data = data;
+    },
+
+    // Deletes a task item and its listeners.
+    remove: function(taskItem) {
+      taskItem.removeEventListener('change', taskItem.data.onCheckboxChange);
+
+      myApp.services.animators.remove(taskItem, function() {
+        // Remove the item before updating the categories.
+        taskItem.remove();
+        // Check if the category has no items and remove it in that case.
+        myApp.services.categories.updateRemove(taskItem.data.category);
+      });
+    }
+  },
+
+  /////////////////////
+  // Category Service //
+  ////////////////////
+  categories: {
+
+    // Creates a new category and attaches it to the custom category list.
+    create: function(categoryLabel) {
+      var categoryId = myApp.services.categories.parseId(categoryLabel);
+
+      // Category item template.
+      var categoryItem = ons.createElement(
+        '<ons-list-item tappable category-id="' + categoryId + '">' +
+          '<div class="left">' +
+            '<ons-radio name="categoryGroup" input-id="radio-'  + categoryId + '"></ons-radio>' +
+          '</div>' +
+          '<label class="center" for="radio-' + categoryId + '">' +
+            (categoryLabel || 'No category') +
+          '</label>' +
+        '</ons-list-item>'
+      );
+
+      // Adds filtering functionality to this category item.
+      myApp.services.categories.bindOnCheckboxChange(categoryItem);
+
+      // Attach the new category to the corresponding list.
+      document.querySelector('#custom-category-list').appendChild(categoryItem);
+    },
+
+    // On task creation/update, updates the category list adding new categories if needed.
+    updateAdd: function(categoryLabel) {
+      var categoryId = myApp.services.categories.parseId(categoryLabel);
+      var categoryItem = document.querySelector('#menuPage ons-list-item[category-id="' + categoryId + '"]');
+
+      if (!categoryItem) {
+        // If the category doesn't exist already, create it.
+        myApp.services.categories.create(categoryLabel);
+      }
+    },
+
+    // On task deletion/update, updates the category list removing categories without tasks if needed.
+    updateRemove: function(categoryLabel) {
+      var categoryId = myApp.services.categories.parseId(categoryLabel);
+      var categoryItem = document.querySelector('#tabbarPage ons-list-item[category="' + categoryId + '"]');
+
+      if (!categoryItem) {
+        // If there are no tasks under this category, remove it.
+        myApp.services.categories.remove(document.querySelector('#custom-category-list ons-list-item[category-id="' + categoryId + '"]'));
+      }
+    },
+
+    // Deletes a category item and its listeners.
+    remove: function(categoryItem) {
+      if (categoryItem) {
+        // Remove listeners and the item itself.
+        categoryItem.removeEventListener('change', categoryItem.updateCategoryView);
+        categoryItem.remove();
+      }
+    },
+
+    // Adds filtering functionality to a category item.
+    bindOnCheckboxChange: function(categoryItem) {
+      var categoryId = categoryItem.getAttribute('category-id');
+      var allItems = categoryId === null;
+
+      categoryItem.updateCategoryView = function() {
+        var query = '[category="' + (categoryId || '') + '"]';
+
+        var taskItems = document.querySelectorAll('#tabbarPage ons-list-item');
+        for (var i = 0; i < taskItems.length; i++) {
+          taskItems[i].style.display = (allItems || taskItems[i].getAttribute('category') === categoryId) ? '' : 'none';
+        }
+      };
+
+      categoryItem.addEventListener('change', categoryItem.updateCategoryView);
+    },
+
+    // Transforms a category name into a valid id.
+    parseId: function(categoryLabel) {
+      return categoryLabel ? categoryLabel.replace(/\s\s+/g, ' ').toLowerCase() : '';
+    }
+  },
+
+  //////////////////////
+  // Animation Service //
+  /////////////////////
+  animators: {
+
+    // Swipe animation for task completion.
+    swipe: function(listItem, callback) {
+      var animation = (listItem.parentElement.id === 'pending-list') ? 'animation-swipe-right' : 'animation-swipe-left';
+      listItem.classList.add('hide-children');
+      listItem.classList.add(animation);
+
+      setTimeout(function() {
+        listItem.classList.remove(animation);
+        listItem.classList.remove('hide-children');
+        callback();
+      }, 950);
+    },
+
+    // Remove animation for task deletion.
+    remove: function(listItem, callback) {
+      listItem.classList.add('animation-remove');
+      listItem.classList.add('hide-children');
+
+      setTimeout(function() {
+        callback();
+      }, 750);
+    }
+  },
+
+  ////////////////////////
+  // Initial Data Service //
+  ////////////////////////
+  fixtures: [
+    {
+      title: 'Download OnsenUI',
+      category: 'Programming',
+      description: 'Some description.',
+      highlight: false,
+      urgent: false
+    },
+    {
+      title: 'Install Monaca CLI',
+      category: 'Programming',
+      description: 'Some description.',
+      highlight: false,
+      urgent: false
+    },
+    {
+      title: 'Star Onsen UI repo on Github',
+      category: 'Super important',
+      description: 'Some description.',
+      highlight: false,
+      urgent: false
+    },
+    {
+      title: 'Register in the community forum',
+      category: 'Super important',
+      description: 'Some description.',
+      highlight: false,
+      urgent: false
+    },
+    {
+      title: 'Send donations to Fran and Andreas',
+      category: 'Super important',
+      description: 'Some description.',
+      highlight: false,
+      urgent: false
+    },
+    {
+      title: 'Profit',
+      category: '',
+      description: 'Some description.',
+      highlight: false,
+      urgent: false
+    },
+    {
+      title: 'Visit Japan',
+      category: 'Travels',
+      description: 'Some description.',
+      highlight: false,
+      urgent: false
+    },
+    {
+      title: 'Enjoy an Onsen with Onsen UI team',
+      category: 'Personal',
+      description: 'Some description.',
+      highlight: false,
+      urgent: false
+    }
+  ]
+};

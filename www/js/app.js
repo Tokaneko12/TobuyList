@@ -1,1 +1,11 @@
-window.myApp={},document.addEventListener("init",function(e){var n=e.target;myApp.controllers.hasOwnProperty(n.id)&&myApp.controllers[n.id](n),"menuPage"!==n.id&&"pendingTasksPage"!==n.id||document.querySelector("#menuPage")&&document.querySelector("#pendingTasksPage")&&!document.querySelector("#pendingTasksPage ons-list-item")&&myApp.services.fixtures.forEach(function(e){myApp.services.tasks.create(e)})});
+// App logic.
+window.myApp = {};
+
+document.addEventListener('init', function(event) {
+  var page = event.target;
+
+  // Each page calls its own initialization controller.
+  if (myApp.controllers.hasOwnProperty(page.id)) {
+    myApp.controllers[page.id](page);
+  }
+});

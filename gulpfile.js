@@ -36,7 +36,7 @@ gulp.task("sass", function () {
 
 gulp.task("js", function() {
   gulp.src(["./src/js/**/*.js"])              // 対象となるjavaScriptファイルを全部指定
-      .pipe(uglify())
+      // .pipe(uglify())
       .pipe(gulp.dest("./www/js/"))       //指定ディレクトリにJS出力
       .pipe(browser.reload({stream: true}));  //ブラウザを更新
 });

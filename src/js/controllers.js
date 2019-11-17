@@ -10,7 +10,7 @@ myApp.controllers = {
   tabbarPage: function(page) {
     // Set button functionality to open/close the menu.
     page.querySelector('[component="button/menu"]').onclick = function() {
-      document.querySelector('#mySplitter').left.toggle();
+      document.querySelector('#mySplitter').right.toggle();
     };
 
     // Set button functionality to push 'new_task.html' page.
@@ -21,9 +21,6 @@ myApp.controllers = {
 
       element.show && element.show(); // Fix ons-fab in Safari.
     });
-
-    // Change tabbar animation depending on platform.
-    page.querySelector('#myTabbar').setAttribute('animation', ons.platform.isAndroid() ? 'slide' : 'none');
   },
 
   ////////////////////////
@@ -35,7 +32,7 @@ myApp.controllers = {
     myApp.services.categories.bindOnCheckboxChange(page.querySelector('#default-category-list ons-list-item:not([category-id])'));
 
     // Change splitter animation depending on platform.
-    document.querySelector('#mySplitter').left.setAttribute('animation', ons.platform.isAndroid() ? 'overlay' : 'reveal');
+    document.querySelector('#mySplitter').right.setAttribute('animation', ons.platform.isAndroid() ? 'overlay' : 'reveal');
   },
 
   ////////////////////////////

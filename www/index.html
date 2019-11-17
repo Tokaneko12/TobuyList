@@ -27,7 +27,7 @@
   <template id="splitter.html">
     <ons-page>
       <ons-splitter id="mySplitter">
-        <ons-splitter-side page="html/menu.html" swipeable width="250px" collapse swipe-target-width="50px">
+        <ons-splitter-side page="html/menu.html" side="right" swipeable width="250px" collapse swipe-target-width="50px">
         </ons-splitter-side>
         <ons-splitter-content page="tabbar.html">
         </ons-splitter-content>
@@ -40,17 +40,15 @@
     <ons-page id="tabbarPage">
       <ons-toolbar>
         <div class="left">
-          <!-- Toolbar-button with different icons depending on the platform. -->
-          <ons-toolbar-button component="button/menu">
-            <ons-icon icon="ion-navicon, material:md-menu" size="32px, material:24px"></ons-icon>
-          </ons-toolbar-button>
-        </div>
-        <div class="center">リスト</div>
-        <div class="right">
-          <!-- Toolbar-button  only visible for iOS/other. -->
           <ons-if platform="ios other">
             <ons-toolbar-button component="button/new-task">追加</ons-toolbar-button>
           </ons-if>
+        </div>
+        <div class="center">リスト</div>
+        <div class="right">
+          <ons-toolbar-button component="button/menu">
+            <ons-icon icon="ion-navicon, material:md-menu" size="32px, material:24px"></ons-icon>
+          </ons-toolbar-button>
         </div>
       </ons-toolbar>
 
@@ -60,14 +58,6 @@
           <ons-icon icon="md-edit"></ons-icon>
         </ons-fab>
       </ons-if>
-
-      <!-- Auto-positioned Tabbar: top on Android, bottom on iOS/other. -->
-      <ons-tabbar id="myTabbar" position="auto">
-        <ons-tab page="html/pending_tasks.html" label="Pending" active>
-        </ons-tab>
-        <ons-tab page="html/completed_tasks.html" label="Completed">
-        </ons-tab>
-      </ons-tabbar>
     </ons-page>
   </template>
 
