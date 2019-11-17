@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <script src="components/loader.js"></script>
+    <link rel="stylesheet" href="components/loader.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/cssua.min.js"></script>
+    <script src="js/app.js"></script>
+
+</head>
+<body>
+    <div data-role="page" id="list-page">
+        <div data-role="header" data-position="fixed" data-theme="c">
+            <h1>買い物日記</h1>
+            <a href="#add-page" data-icon="add" class="ui-btn-right">追加</a>
+        </div>
+        <div data-role="content">
+            <ul data-role="listview" data-inset="true" id="todo-list"></ul>
+        </div>
+    </div>
+
+    <div data-role="page" id="add-page">
+        <div data-role="header" data-position="fixed" data-theme="c">
+            <h1>リスト</h1>
+            <a href="#list-page" data-icon="back" class="ui-btn-left">戻る</a>
+        </div>
+        <div data-role="content">
+            <input id="todo-title" type="text" placeholder="タイトル">
+            <textarea id="todo-body" style="height: 8em" placeholder="詳細"></textarea>
+            <input id="add-button" type="button" value="保存" onclick="addTodo()">
+            <input id="add-button" type="button" value="添付画像" onclick="addTodoPicture()"  data-theme="b">
+        </div>
+    </div>
+</body>
+</html>
