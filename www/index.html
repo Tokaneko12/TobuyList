@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <title>買い物日記</title>
 
+  <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-analytics.js"></script>
   <script src="components/onsen/js/onsenui.js"></script>
-
+  <script src="components/angularjs/angular.min.js"></script>
   <script src="js/app.js"></script>
-  <script src="js/services.js"></script>
-  <script src="js/controllers.js"></script>
-
   <link rel="stylesheet" href="components/onsen/css/onsenui.css">
   <link rel="stylesheet" href="components/onsen/css/onsen-css-components.css">
   <link rel="stylesheet" href="css/style.css">
@@ -40,11 +40,9 @@
     <ons-page id="tabbarPage">
       <ons-toolbar>
         <div class="left">
-          <ons-if platform="ios other">
-            <ons-toolbar-button component="button/new-task">追加</ons-toolbar-button>
-          </ons-if>
+          <ons-toolbar-button component="button/new-task">追加</ons-toolbar-button>
         </div>
-        <div class="center">リスト</div>
+        <div class="center">買いメモ</div>
         <div class="right">
           <ons-toolbar-button component="button/menu">
             <ons-icon icon="ion-navicon, material:md-menu" size="32px, material:24px"></ons-icon>
@@ -52,12 +50,9 @@
         </div>
       </ons-toolbar>
 
-      <!-- Floating Action Button only visible for Android. -->
-      <ons-if platform="android">
-        <ons-fab position="right bottom" component="button/new-task">
-          <ons-icon icon="md-edit"></ons-icon>
-        </ons-fab>
-      </ons-if>
+      <div>
+        <ons-button>追加</ons-button>
+      </div>
     </ons-page>
   </template>
 
