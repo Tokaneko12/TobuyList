@@ -124,3 +124,25 @@ ons-splitter-side[side="left"][animation="overlay"] {
   100% {
     opacity: 0.1;
     height: 0; } }
+
+ons-toolbar .toolbar-button {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+          justify-content: center;
+  height: 100%;
+  padding: 0;
+  border: none; }
+
+ons-toolbar .left {
+  width: 15%; }
+  ons-toolbar .left img {
+    width: 24px; }
+
+ons-toolbar .center {
+  width: 70%; }
+
+ons-toolbar .right {
+  width: 15%; }

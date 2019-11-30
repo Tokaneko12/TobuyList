@@ -163,3 +163,30 @@ ons-splitter-side[side="left"][animation="overlay"] {
     height: 0;
   }
 }
+
+ons-toolbar {
+
+  .toolbar-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 0;
+    border: none;
+  }
+
+  .left {
+    width: 15%;
+    img {
+      width: 24px;
+    }
+  }
+
+  .center {
+    width: 70%;
+  }
+
+  .right {
+    width: 15%;
+  }
+}
