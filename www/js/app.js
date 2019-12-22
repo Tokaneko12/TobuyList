@@ -14,3 +14,40 @@ firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 
 var db = firebase.firestore();
+
+console.log(db);
+
+var Module = ons.bootstrap();
+
+ons.ready(function() {
+});
+
+Module.controller('SplitterController', function() {
+  console.log("aaa");
+});
+
+Module.controller('TabbarController', function() {
+  console.log("bbb");
+  var $ctrl = this;
+  $ctrl.buyItems = [];
+  $ctrl.itemName = "";
+
+  $ctrl.addItem = function() {
+    $ctrl.buyItems.push({
+      name: $ctrl.itemName,
+      check: false
+    });
+    $ctrl.itemName = "";
+    itemInputDialog.hide();
+  }
+
+  $ctrl.compBuy = function() {
+    $ctrl.buyItems = [];
+
+    // db.collection("buyItems").add({
+    //   name: "Los Angeles",
+    //   state: "CA",
+    //   country: "USA"
+    // })
+  }
+});

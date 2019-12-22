@@ -4,6 +4,7 @@ var autoprefixer = require("gulp-autoprefixer");
 var browser = require("browser-sync");
 var plumber = require("gulp-plumber");
 var uglify = require("gulp-uglify");
+var concat = require("gulp-concat");
 
 gulp.task("server", function () {
     browser({
@@ -36,15 +37,20 @@ gulp.task("sass", function () {
 
 gulp.task("js", function() {
   gulp.src(["./src/js/**/*.js"])              // 対象となるjavaScriptファイルを全部指定
+      .pipe(plumber())
+      .pipe(concat('app.js'))
       // .pipe(uglify())
       .pipe(gulp.dest("./www/js/"))       //指定ディレクトリにJS出力
       .pipe(browser.reload({stream: true}));  //ブラウザを更新
 });
 
+//build
+gulp.task("build", ["html", "component", "sass", "js", "server"]);
+
 //タスクの一括実行、各ファイルの監視実行
-gulp.task("default", gulp.series(gulp.parallel("html", "component", "sass", "js", "server"), function () {
-    gulp.watch("./src/index.html", gulp.task("html"));
-    gulp.watch("./src/html/**/*.html", gulp.task("component"));
-    gulp.watch("./src/sass/**/*scss", gulp.task("sass"));
-    gulp.watch("./src/js/**/*.js", gulp.task("js"));
-}));
+gulp.task("default", ['build', 'server'], function () {
+    gulp.watch("./src/index.html", ["html"]);
+    gulp.watch("./src/html/**/*.html", ["component"]);
+    gulp.watch("./src/sass/**/*scss", ["sass"]);
+    gulp.watch("./src/js/**/*.js", ["js"]);
+});

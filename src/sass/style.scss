@@ -33,10 +33,8 @@ ons-splitter-side[side="left"][animation="overlay"] {
  ********************/
 
 #tabbarPage .list {
-  background-color: grey;
   overflow-x: hidden;
   margin-top: -1px;
-  border-bottom: 1px solid #ccc;
 }
 
 #tabbarPage .list-item {
@@ -164,7 +162,14 @@ ons-splitter-side[side="left"][animation="overlay"] {
   }
 }
 
+$toolbarIconColor: #ffb6c1;
+
+.page__content {
+  background-color: #ffffff !important;
+}
+
 ons-toolbar {
+  // background-color: #f !important;
 
   .toolbar-button {
     display: flex;
@@ -184,9 +189,42 @@ ons-toolbar {
 
   .center {
     width: 70%;
+    color: #000;
   }
 
   .right {
     width: 15%;
+
+    ons-icon {
+      font-size: 1.8rem;
+      color: #000;
+    }
+  }
+}
+
+.main--wrapper {
+  height: 100%;
+
+  .buy-list--wrapper {
+    height: 80%;
+
+    .buy-list {
+      background: none;
+      height: 80%;
+
+      &__item {
+        &__check{
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+
+  .button--wrapper {
+    text-align: center;
+
+    .comp-button {
+      margin: 0 auto;
+    }
   }
 }

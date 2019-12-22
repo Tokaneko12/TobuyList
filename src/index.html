@@ -7,11 +7,12 @@
   <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-firestore.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-analytics.js"></script>
-  <script src="components/onsen/js/onsenui.js"></script>
+  <script src="components/onsenui/js/onsenui.min.js"></script>
   <script src="components/angularjs/angular.min.js"></script>
+  <script src="components/onsenui/js/angular-onsenui.min.js"></script>
   <script src="js/app.js"></script>
-  <link rel="stylesheet" href="components/onsen/css/onsenui.css">
-  <link rel="stylesheet" href="components/onsen/css/onsen-css-components.css">
+  <link rel="stylesheet" href="components/onsenui/css/onsenui.min.css">
+  <link rel="stylesheet" href="components/onsenui/css/onsen-css-components.css">
   <link rel="stylesheet" href="css/style.css">
 
 </head>
@@ -25,9 +26,9 @@
 
   <!-- Second navigation component: Splitter. This will disappear if the first component changes its content. -->
   <template id="splitter.html">
-    <ons-page>
-      <ons-splitter var="mySplitter">
-        <ons-splitter-side page="html/menu.html" side="right" swipeable width="250px" collapse swipe-target-width="50px">
+    <ons-page ng-controller="SplitterController as $ctrl">
+      <ons-splitter var="Splitter">
+        <ons-splitter-side var="slideMenu" page="html/menu.html" side="right" swipeable width="250px" collapse swipe-target-width="50px">
         </ons-splitter-side>
         <ons-splitter-content page="tabbar.html">
         </ons-splitter-content>
@@ -37,24 +38,41 @@
 
   <!-- Third navigation component: Tabbar. This will disappear if the first or second components change their content. -->
   <template id="tabbar.html">
-    <ons-page id="tabbarPage">
+    <ons-page id="tabbarPage" ng-controller="TabbarController as $ctrl">
       <ons-toolbar>
         <div class="left">
           <ons-toolbar-button>
-            <img src="img/comment-regular.svg" alt="">
+            <!-- <img src="img/comment-regular.svg" alt=""> -->
           </ons-toolbar-button>
         </div>
         <div class="center">買うものリスト</div>
         <div class="right">
-          <ons-toolbar-button ng-click="mySplitter.right.open()">
-            <ons-icon icon="ion-navicon, material:md-menu" size="32px, material:24px"></ons-icon>
+          <ons-toolbar-button ng-click="Splitter.right.open()">
+            <ons-icon icon="md-menu"></ons-icon>
           </ons-toolbar-button>
         </div>
       </ons-toolbar>
 
-      <div>
-        <ons-button>追加</ons-button>
+      <div class="main--wrapper">
+        <div class="buy-list--wrapper" ng-click="itemInputDialog.show();">
+          <ons-list class="buy-list" ng-repeat="buyItem in $ctrl.buyItems">
+            <ons-list-item class="buy-list__item" ng-click="buyItem.check = !buyItem.check;$event.stopPropagation();">
+              <ons-checkbox class="buy-list__item__check" ng-model="buyItem.check"></ons-checkbox>
+              {{buyItem.name}}
+            </ons-list-item>
+          </ons-list>
+        </div>
+        <div class="button--wrapper">
+          <ons-button class="comp-button" ng-click="$ctrl.compBuy();">買い物完了</ons-button>
+        </div>
       </div>
+
+      <ons-dialog var="itemInputDialog" cancelable>
+        <div class="">
+          <input type="text" name="買い物アイテム名" ng-model="$ctrl.itemName">
+        </div>
+        <ons-button ng-click="$ctrl.addItem();">追加</ons-butoon>
+      </ons-dialog>
     </ons-page>
   </template>
 
