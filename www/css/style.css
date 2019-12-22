@@ -123,6 +123,9 @@ ons-splitter-side[side="left"][animation="overlay"] {
     opacity: 0.1;
     height: 0; } }
 
+.button {
+  background-color: #ffa07a; }
+
 .page__content {
   background-color: #ffffff !important; }
 
@@ -150,18 +153,54 @@ ons-toolbar .right {
   width: 15%; }
   ons-toolbar .right ons-icon {
     font-size: 1.8rem;
-    color: #000; }
+    color: #ffa07a; }
 
 .main--wrapper {
   height: 100%; }
   .main--wrapper .buy-list--wrapper {
-    height: 80%; }
+    height: calc(100% - 70px); }
     .main--wrapper .buy-list--wrapper .buy-list {
       background: none;
       height: 80%; }
       .main--wrapper .buy-list--wrapper .buy-list__item__check {
         margin-right: 10px; }
   .main--wrapper .button--wrapper {
+    height: 40px;
+    margin-bottom: 30px;
     text-align: center; }
     .main--wrapper .button--wrapper .comp-button {
+      width: 70%;
       margin: 0 auto; }
+
+.item-input__dialog .item-text--wrapper {
+  text-align: center;
+  margin: 50px 0 5px; }
+  .item-input__dialog .item-text--wrapper .item-text__input {
+    font-size: 1.2rem;
+    width: 80%;
+    height: 30px;
+    padding-left: 10px; }
+
+.item-input__dialog .item-add--wrapper {
+  margin: 15px 0 30px;
+  text-align: center; }
+  .item-input__dialog .item-add--wrapper .item-add__button {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+            justify-content: center;
+    width: 60%;
+    height: 36px;
+    line-height: 36px;
+    margin: 0 auto; }
+
+.menu-list--wrapper {
+  margin-top: 30px; }
+  .menu-list--wrapper .menu-list {
+    background: none; }
+    .menu-list--wrapper .menu-list__item {
+      background: none; }
+  .menu-list--wrapper .list-item--chevron:before {
+    border-color: #ffa07a; }

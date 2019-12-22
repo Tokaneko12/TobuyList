@@ -33,12 +33,14 @@ Module.controller('TabbarController', function() {
   $ctrl.itemName = "";
 
   $ctrl.addItem = function() {
-    $ctrl.buyItems.push({
-      name: $ctrl.itemName,
-      check: false
-    });
-    $ctrl.itemName = "";
-    itemInputDialog.hide();
+    if($ctrl.itemName.length > 0) {
+      $ctrl.buyItems.push({
+        name: $ctrl.itemName,
+        check: false
+      });
+      $ctrl.itemName = "";
+      itemInputDialog.hide();
+    }
   }
 
   $ctrl.compBuy = function() {

@@ -45,7 +45,7 @@
             <!-- <img src="img/comment-regular.svg" alt=""> -->
           </ons-toolbar-button>
         </div>
-        <div class="center">買うものリスト</div>
+        <div class="center">買うリスト</div>
         <div class="right">
           <ons-toolbar-button ng-click="Splitter.right.open()">
             <ons-icon icon="md-menu"></ons-icon>
@@ -55,8 +55,8 @@
 
       <div class="main--wrapper">
         <div class="buy-list--wrapper" ng-click="itemInputDialog.show();">
-          <ons-list class="buy-list" ng-repeat="buyItem in $ctrl.buyItems">
-            <ons-list-item class="buy-list__item" ng-click="buyItem.check = !buyItem.check;$event.stopPropagation();">
+          <ons-list class="buy-list">
+            <ons-list-item class="buy-list__item" ng-repeat="buyItem in $ctrl.buyItems" ng-click="buyItem.check = !buyItem.check;$event.stopPropagation();">
               <ons-checkbox class="buy-list__item__check" ng-model="buyItem.check"></ons-checkbox>
               {{buyItem.name}}
             </ons-list-item>
@@ -67,11 +67,13 @@
         </div>
       </div>
 
-      <ons-dialog var="itemInputDialog" cancelable>
-        <div class="">
-          <input type="text" name="買い物アイテム名" ng-model="$ctrl.itemName">
+      <ons-dialog class="item-input__dialog" var="itemInputDialog" cancelable>
+        <div class="item-text--wrapper" onclick="this.querySelector('input').focus()">
+          <input class="item-text__input" type="text" name="買い物アイテム名" ng-model="$ctrl.itemName">
         </div>
-        <ons-button ng-click="$ctrl.addItem();">追加</ons-butoon>
+        <div class="item-add--wrapper">
+          <ons-button class="item-add__button" ng-click="$ctrl.addItem();">追加</ons-butoon>
+        </div>
       </ons-dialog>
     </ons-page>
   </template>

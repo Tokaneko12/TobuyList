@@ -162,7 +162,11 @@ ons-splitter-side[side="left"][animation="overlay"] {
   }
 }
 
-$toolbarIconColor: #ffb6c1;
+$toolbarIconColor: #ffa07a;
+
+.button {
+  background-color: #ffa07a;
+}
 
 .page__content {
   background-color: #ffffff !important;
@@ -197,7 +201,7 @@ ons-toolbar {
 
     ons-icon {
       font-size: 1.8rem;
-      color: #000;
+      color: #ffa07a;
     }
   }
 }
@@ -206,7 +210,7 @@ ons-toolbar {
   height: 100%;
 
   .buy-list--wrapper {
-    height: 80%;
+    height: calc(100% - 70px);
 
     .buy-list {
       background: none;
@@ -221,10 +225,59 @@ ons-toolbar {
   }
 
   .button--wrapper {
+    height: 40px;
+    margin-bottom: 30px;
     text-align: center;
 
     .comp-button {
+      width: 70%;
       margin: 0 auto;
     }
+  }
+}
+
+.item-input__dialog {
+
+  .item-text--wrapper {
+    text-align: center;
+    margin: 50px 0 5px;
+
+    .item-text__input {
+      font-size: 1.2rem;
+      width: 80%;
+      height: 30px;
+      padding-left: 10px;
+    }
+  }
+
+  .item-add--wrapper {
+    margin: 15px 0 30px;
+    text-align: center;
+
+    .item-add__button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 60%;
+      height: 36px;
+      line-height: 36px;
+      margin: 0 auto;
+    }
+  }
+}
+
+.menu-list--wrapper {
+  margin-top: 30px;
+
+  .menu-list {
+    background: none;
+
+    &__item {
+      background: none;
+    }
+  }
+
+  .list-item--chevron:before {
+    border-color: #ffa07a;
   }
 }
