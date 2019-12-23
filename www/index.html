@@ -45,7 +45,7 @@
             <!-- <img src="img/comment-regular.svg" alt=""> -->
           </ons-toolbar-button>
         </div>
-        <div class="center">買うリスト</div>
+        <div class="center">買うもの</div>
         <div class="right">
           <ons-toolbar-button ng-click="Splitter.right.open()">
             <ons-icon icon="md-menu"></ons-icon>
@@ -54,11 +54,13 @@
       </ons-toolbar>
 
       <div class="main--wrapper">
-        <div class="buy-list--wrapper" ng-click="itemInputDialog.show();">
+        <div class="buy-list--wrapper" ng-class="{'tap-recommend': $ctrl.buyItems.length < 1}" ng-click="itemInputDialog.show();">
           <ons-list class="buy-list">
             <ons-list-item class="buy-list__item" ng-repeat="buyItem in $ctrl.buyItems" ng-click="buyItem.check = !buyItem.check;$event.stopPropagation();">
               <ons-checkbox class="buy-list__item__check" ng-model="buyItem.check"></ons-checkbox>
-              {{buyItem.name}}
+              <span ng-class="{'line-through': buyItem.check}">{{buyItem.name}}</span>
+              <span class="buy-list__item__number">{{buyItem.number}}</span>
+              <ons-icon class="more-icon" icon="md-more-vert" ng-click="$ctrl.openItemMenu(buyItem, $index);$event.stopPropagation();"></ons-icon>
             </ons-list-item>
           </ons-list>
         </div>
@@ -67,9 +69,12 @@
         </div>
       </div>
 
-      <ons-dialog class="item-input__dialog" var="itemInputDialog" cancelable>
+      <ons-dialog class="item-input__dialog" var="itemInputDialog" ons-postHide="$ctrl.resetVal();" cancelable>
         <div class="item-text--wrapper" onclick="this.querySelector('input').focus()">
-          <input class="item-text__input" type="text" name="買い物アイテム名" ng-model="$ctrl.itemName">
+          <input class="item-text__input" type="text" placeholder="項目名" name="買い物アイテム名" ng-model="$ctrl.itemName">
+        </div>
+        <div class="item-num--wrapper" onclick="this.querySelector('input').focus()">
+          <input class="item-num__input" type="text" placeholder="数量" name="買い物アイテム数" ng-model="$ctrl.itemNum">
         </div>
         <div class="item-add--wrapper">
           <ons-button class="item-add__button" ng-click="$ctrl.addItem();">追加</ons-butoon>

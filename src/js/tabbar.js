@@ -1,20 +1,57 @@
-Module.controller('TabbarController', function() {
-  console.log("bbb");
+Module.controller('TabbarController', ['$scope' ,function($scope) {
   var $ctrl = this;
   $ctrl.buyItems = [];
   $ctrl.itemName = "";
 
+  // 買いものアイテムの追加
   $ctrl.addItem = function() {
-    if($ctrl.itemName.length > 0) {
-      $ctrl.buyItems.push({
-        name: $ctrl.itemName,
-        check: false
-      });
-      $ctrl.itemName = "";
-      itemInputDialog.hide();
+    var buyObj = {
+      name: $ctrl.itemName,
+      check: false,
+      number: $ctrl.itemNum
+    };
+    if($ctrl.modifyIdx >= 0) {
+      console.log($ctrl.modifyIdx);
+      $ctrl.buyItems.splice($ctrl.modifyIdx, 1, buyObj);
+    } else if($ctrl.itemName.length > 0) {
+      $ctrl.buyItems.push(buyObj);
     }
+    itemInputDialog.hide();
   }
 
+  // 買い物アイテムメニューを開く
+  $ctrl.openItemMenu = function(buyItem, buyIdx) {
+    ons.openActionSheet({
+      title: '項目メニュー',
+      cancelable: true,
+      buttons: [
+        '編集',
+        {
+          label: '削除',
+          modifier: 'destructive'
+        },
+        {
+          label: 'キャンセル',
+          icon: 'md-close'
+        }
+      ]
+    }).then(function(index) {
+      if(index == 0) {
+        $ctrl.modifyIdx = buyIdx;
+        console.log($ctrl.modifyIdx);
+        $ctrl.itemName = buyItem.name;
+        $ctrl.itemNum = buyItem.number;
+        $scope.$apply();
+        itemInputDialog.show();
+      }
+      if(index == 1) {
+        $ctrl.buyItems.splice(buyIdx, 1);
+        $scope.$apply();
+      }
+    })
+  }
+
+  // 買い物完了
   $ctrl.compBuy = function() {
     $ctrl.buyItems = [];
 
@@ -24,4 +61,10 @@ Module.controller('TabbarController', function() {
     //   country: "USA"
     // })
   }
-});
+
+  $ctrl.resetVal = function() {
+    $ctrl.modifyIdx = -1;
+    $ctrl.itemName = "";
+    $ctrl.itemNum = "";
+  }
+}]);
