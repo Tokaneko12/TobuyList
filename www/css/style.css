@@ -167,8 +167,8 @@ ons-toolbar .right {
   .main--wrapper .buy-list--wrapper {
     height: calc(100% - 70px); }
     .main--wrapper .buy-list--wrapper.tap-recommend {
-      background-image: url("../img/tap_action.png");
-      background-size: 25%;
+      background-image: url("../img/action_tap.png");
+      background-size: 22%;
       background-position: center 35%;
       background-repeat: no-repeat; }
     .main--wrapper .buy-list--wrapper .buy-list {
@@ -260,3 +260,9 @@ ons-toolbar .right {
     border-color: #ffa07a;
     width: 8px;
     height: 8px; }
+
+.back-button {
+  padding: 0 10px 0 15px; }
+
+.back-button__icon {
+  fill: #ffa07a; }

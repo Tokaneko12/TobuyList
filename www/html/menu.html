@@ -1,10 +1,10 @@
-<ons-page id="menuPage">
+<ons-page id="menuPage" ng-controller="MenuController as $ctrl">
   <div class="menu-list--wrapper">
     <ons-list class="menu-list">
-      <ons-list-item class="menu-list__item" tappable style="cursor: pointer" modifier="longdivider chevron">
+      <ons-list-item class="menu-list__item" ng-click="$ctrl.openDialy();" tappable style="cursor: pointer" modifier="longdivider chevron">
         日記
       </ons-list-item>
-      <ons-list-item class="menu-list__item" tappable style="cursor: pointer" modifier="longdivider chevron">
+      <ons-list-item class="menu-list__item" ng-click="$ctrl.openBuyItem();" tappable style="cursor: pointer" modifier="longdivider chevron">
         よく買うもの
       </ons-list-item>
     </ons-list>

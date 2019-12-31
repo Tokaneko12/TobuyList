@@ -2,6 +2,7 @@ Module.controller('TabbarController', ['$scope' ,function($scope) {
   var $ctrl = this;
   $ctrl.buyItems = [];
   $ctrl.itemName = "";
+  $ctrl.modifyMode = false;
 
   // 買いものアイテムの追加
   $ctrl.addItem = function() {
@@ -11,7 +12,6 @@ Module.controller('TabbarController', ['$scope' ,function($scope) {
       number: $ctrl.itemNum
     };
     if($ctrl.modifyIdx >= 0) {
-      console.log($ctrl.modifyIdx);
       $ctrl.buyItems.splice($ctrl.modifyIdx, 1, buyObj);
     } else if($ctrl.itemName.length > 0) {
       $ctrl.buyItems.push(buyObj);
@@ -38,6 +38,7 @@ Module.controller('TabbarController', ['$scope' ,function($scope) {
     }).then(function(index) {
       if(index == 0) {
         $ctrl.modifyIdx = buyIdx;
+        $ctrl.modifyMode = true;
         console.log($ctrl.modifyIdx);
         $ctrl.itemName = buyItem.name;
         $ctrl.itemNum = buyItem.number;
@@ -55,6 +56,12 @@ Module.controller('TabbarController', ['$scope' ,function($scope) {
   $ctrl.compBuy = function() {
     $ctrl.buyItems = [];
 
+    ons.notification.confirm({
+      title: '',
+      message: '買い物を完了しますか？',
+      cancelable: true,
+    });
+
     // db.collection("buyItems").add({
     //   name: "Los Angeles",
     //   state: "CA",
@@ -64,6 +71,7 @@ Module.controller('TabbarController', ['$scope' ,function($scope) {
 
   $ctrl.resetVal = function() {
     $ctrl.modifyIdx = -1;
+    $ctrl.modifyMode = false;
     $ctrl.itemName = "";
     $ctrl.itemNum = "";
   }
