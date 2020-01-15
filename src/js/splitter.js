@@ -1,3 +1,6 @@
 Module.controller('SplitterController', function() {
-  console.log(splitterNav);
+  var $ctrl = this;
+  $ctrl.aaa = function() {
+    console.log("aaa");
+  }
 });

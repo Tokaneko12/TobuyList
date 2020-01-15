@@ -6,6 +6,7 @@
 
   <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-analytics.js"></script>
   <script src="components/onsenui/js/onsenui.min.js"></script>
   <script src="components/angularjs/angular.min.js"></script>
@@ -26,7 +27,7 @@
 
   <!-- Second navigation component: Splitter. This will disappear if the first component changes its content. -->
   <template id="splitter.html">
-    <ons-page ng-controller="SplitterController as $ctrl">
+    <ons-page ng-controller="SplitterController as ctrl">
       <ons-splitter var="Splitter">
         <ons-splitter-side var="slideMenu" page="html/menu.html" side="right" swipeable width="250px" collapse swipe-target-width="50px">
         </ons-splitter-side>
@@ -72,10 +73,10 @@
 
       <ons-dialog class="item-input__dialog" var="itemInputDialog" ons-postHide="$ctrl.resetVal();" cancelable>
         <div class="item-text--wrapper" onclick="this.querySelector('input').focus()">
-          <input class="item-text__input" type="text" placeholder="項目名" name="買い物アイテム名" ng-model="$ctrl.itemName">
+          <input class="item-text__input" type="text" placeholder="項目名" name="買い物アイテム名" ng-model="$ctrl.itemName" jp-input>
         </div>
         <div class="item-num--wrapper" onclick="this.querySelector('input').focus()">
-          <input class="item-num__input" type="text" placeholder="数量" name="買い物アイテム数" ng-model="$ctrl.itemNum">
+          <input class="item-num__input" type="text" placeholder="数量" name="買い物アイテム数" ng-model="$ctrl.itemNum" jp-input>
         </div>
         <div class="item-add--wrapper">
           <ons-button class="item-add__button" ng-click="$ctrl.addItem();">
