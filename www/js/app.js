@@ -14,8 +14,25 @@ firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 
 var db = firebase.firestore();
+var authUser;
 
-console.log(db);
+// 匿名ユーザを生成
+firebase.auth().signInAnonymously().then(function(authUser) {
+  var localAuth = {
+    uid: authUser.user.uid
+  }
+  localStorage.setItem('localAuth', JSON.stringify(localAuth));
+})
+
+firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    authUser = user;
+  } else {
+    // User is signed out.
+    console.log('認証切れ');
+    authUser = localStorage.getItem('localAuth', JSON.parse(localAuth));
+  }
+});
 
 var Module = ons.bootstrap();
 
@@ -51,7 +68,8 @@ Module.controller('TabbarController', ['$scope' ,function($scope) {
     var buyObj = {
       name: $ctrl.itemName,
       check: false,
-      number: $ctrl.itemNum
+      number: $ctrl.itemNum,
+      uid: authUser.uid,
     };
     if($ctrl.modifyIdx >= 0) {
       $ctrl.buyItems.splice($ctrl.modifyIdx, 1, buyObj);
@@ -81,7 +99,6 @@ Module.controller('TabbarController', ['$scope' ,function($scope) {
       if(index == 0) {
         $ctrl.modifyIdx = buyIdx;
         $ctrl.modifyMode = true;
-        console.log($ctrl.modifyIdx);
         $ctrl.itemName = buyItem.name;
         $ctrl.itemNum = buyItem.number;
         $scope.$apply();
