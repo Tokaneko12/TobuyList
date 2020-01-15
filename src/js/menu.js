@@ -3,11 +3,12 @@ Module.controller('MenuController', function() {
 
   // 日記画面を開く
   $ctrl.openDialy = function() {
-    splitterNav.pushPage('html/new_task.html');
+    splitterNav.pushPage('html/buy_diary.html');
   }
 
+  // 買い物カードを開く
   $ctrl.openBuyItem = function() {
-    splitterNav.pushPage('html/details_task.html');
+    splitterNav.pushPage('html/buy_card.html');
   }
 
 });

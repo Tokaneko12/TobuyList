@@ -208,6 +208,12 @@ ons-toolbar {
 
   .right {
     width: 15%;
+    text-align: center;
+
+    span {
+      color: #ffa07a;
+      font-weight: bold;
+    }
 
     ons-icon {
       font-size: 1.8rem;
@@ -336,6 +342,7 @@ ons-toolbar {
   margin-top: 30px;
 
   .menu-list {
+    width: 100%;
     background: none;
 
     &__item {
@@ -343,6 +350,23 @@ ons-toolbar {
 
       .center {
         min-height: 54px;
+      }
+    }
+
+    &.bottom-list {
+      position: absolute;
+      bottom: 100px;
+      border-top: 1px solid #eee;
+      font-size: 0.75rem;
+
+      .center {
+        opacity: 0.8;
+      }
+
+      .list-item--chevron:before {
+        border-color: #bbb;
+        width: 6px;
+        height: 6px;
       }
     }
   }
@@ -360,4 +384,43 @@ ons-toolbar {
 
 .back-button__icon {
   fill: #ffa07a;
+}
+
+.wrap {
+  padding: 20px 0;
+  margin: 0 2vw;
+  font-size: 0;
+  text-align: left;
+
+  .card {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30vw;
+    height: 30vw;
+    padding: 0;
+    margin: 0;
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: #ffa07a;
+    box-shadow: 1px 1px 3px 1px rgba(0,0,0,0.15);
+    border: 0.5px solid #ffa07a;
+    margin: 1vw 1vw;
+
+    &.add {
+      border: none;
+    }
+
+    &__inner {
+      text-align: center;
+
+      .plus-icon {
+        font-size: 1.6rem;
+      }
+
+      p {
+        margin: 10px 0 0;
+      }
+    }
+  }
 }

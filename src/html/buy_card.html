@@ -1,0 +1,56 @@
+<ons-page id="buyCardPage" ng-controller="buyCardController as $ctrl">
+
+  <ons-toolbar>
+    <div class="left">
+      <ons-back-button>
+      </ons-back-button>
+    </div>
+    <div class="center">買い物カード</div>
+    <div class="right">
+      <span>登録</span>
+    </div>
+  </ons-toolbar>
+
+  <div class="wrap">
+    <div class="card" ng-click="$ctrl.plusCard();">
+      <div class="card__inner">
+        <p>卵</p>
+      </div>
+    </div>
+    <div class="card" ng-click="$ctrl.plusCard();">
+      <div class="card__inner">
+        <p>ハム</p>
+      </div>
+    </div>
+    <div class="card" ng-click="$ctrl.plusCard();">
+      <div class="card__inner">
+        <p>お米</p>
+      </div>
+    </div>
+    <div class="card" ng-click="$ctrl.plusCard();">
+      <div class="card__inner">
+        <p>味噌</p>
+      </div>
+    </div>
+    <div class="card" ng-click="$ctrl.plusCard();">
+      <div class="card__inner">
+        <p>もも肉</p>
+      </div>
+    </div>
+    <div class="card" ng-click="$ctrl.plusCard();">
+      <div class="card__inner">
+        <p>ごぼう</p>
+      </div>
+    </div>
+    <div class="card add" ng-click="$ctrl.plusCard();">
+      <div class="card__inner">
+        <ons-icon class="plus-icon" icon="fa-plus"></ons-icon>
+        <p>カードを追加</p>
+      </div>
+    </div>
+  </div>
+
+  <ons-bottom-toolbar>
+  </ons-bottom-toolbar>
+
+</ons-page>

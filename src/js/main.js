@@ -14,8 +14,25 @@ firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 
 var db = firebase.firestore();
+var authUser;
 
-console.log(db);
+// 匿名ユーザを生成
+firebase.auth().signInAnonymously().then(function(authUser) {
+  var localAuth = {
+    uid: authUser.user.uid
+  }
+  localStorage.setItem('localAuth', JSON.stringify(localAuth));
+})
+
+firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    authUser = user;
+  } else {
+    // User is signed out.
+    console.log('認証切れ');
+    authUser = localStorage.getItem('localAuth', JSON.parse(localAuth));
+  }
+});
 
 var Module = ons.bootstrap();
 
