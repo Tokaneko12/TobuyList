@@ -157,7 +157,11 @@ ons-toolbar .center {
   text-align: center; }
 
 ons-toolbar .right {
-  width: 15%; }
+  width: 15%;
+  text-align: center; }
+  ons-toolbar .right span {
+    color: #ffa07a;
+    font-weight: bold; }
   ons-toolbar .right ons-icon {
     font-size: 1.8rem;
     color: #ffa07a; }
@@ -251,11 +255,23 @@ ons-toolbar .right {
 .menu-list--wrapper {
   margin-top: 30px; }
   .menu-list--wrapper .menu-list {
+    width: 100%;
     background: none; }
     .menu-list--wrapper .menu-list__item {
       background: none; }
       .menu-list--wrapper .menu-list__item .center {
         min-height: 54px; }
+    .menu-list--wrapper .menu-list.bottom-list {
+      position: absolute;
+      bottom: 100px;
+      border-top: 1px solid #eee;
+      font-size: 0.75rem; }
+      .menu-list--wrapper .menu-list.bottom-list .center {
+        opacity: 0.8; }
+      .menu-list--wrapper .menu-list.bottom-list .list-item--chevron:before {
+        border-color: #bbb;
+        width: 6px;
+        height: 6px; }
   .menu-list--wrapper .list-item--chevron:before {
     border-color: #ffa07a;
     width: 8px;
@@ -266,3 +282,34 @@ ons-toolbar .right {
 
 .back-button__icon {
   fill: #ffa07a; }
+
+.wrap {
+  padding: 20px 0;
+  margin: 0 2vw;
+  font-size: 0;
+  text-align: left; }
+  .wrap .card {
+    display: -webkit-inline-box;
+    display: inline-flex;
+    -webkit-box-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+            justify-content: center;
+    width: 30vw;
+    height: 30vw;
+    padding: 0;
+    margin: 0;
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: #ffa07a;
+    box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.15);
+    border: 0.5px solid #ffa07a;
+    margin: 1vw 1vw; }
+    .wrap .card.add {
+      border: none; }
+    .wrap .card__inner {
+      text-align: center; }
+      .wrap .card__inner .plus-icon {
+        font-size: 1.6rem; }
+      .wrap .card__inner p {
+        margin: 10px 0 0; }
