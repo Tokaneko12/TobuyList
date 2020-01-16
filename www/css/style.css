@@ -204,6 +204,8 @@ ons-toolbar .right {
           color: #bdbdbd; }
         .main--wrapper .buy-list--wrapper .buy-list__item .line-through {
           text-decoration: line-through; }
+        .main--wrapper .buy-list--wrapper .buy-list__item .tenlength-over {
+          font-size: 0.7rem; }
   .main--wrapper .button--wrapper {
     height: 40px;
     margin-bottom: 30px;
@@ -289,6 +291,7 @@ ons-toolbar .right {
   font-size: 0;
   text-align: left; }
   .wrap .card {
+    position: relative;
     display: -webkit-inline-box;
     display: inline-flex;
     -webkit-box-align: center;
@@ -302,14 +305,20 @@ ons-toolbar .right {
     font-size: 0.85rem;
     font-weight: bold;
     color: #ffa07a;
-    box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.15);
-    border: 0.5px solid #ffa07a;
+    box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.12);
+    border: 1px solid #ffa07a;
     margin: 1vw 1vw; }
     .wrap .card.add {
       border: none; }
     .wrap .card__inner {
+      position: absolute;
       text-align: center; }
       .wrap .card__inner .plus-icon {
         font-size: 1.6rem; }
-      .wrap .card__inner p {
+      .wrap .card__inner .plus-text {
         margin: 10px 0 0; }
+      .wrap .card__inner p {
+        margin: 0;
+        font-size: 0.9rem; }
+      .wrap .card__inner span {
+        font-size: 0.8rem; }

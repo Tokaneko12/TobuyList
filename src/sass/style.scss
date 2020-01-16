@@ -272,6 +272,10 @@ ons-toolbar {
         .line-through {
           text-decoration: line-through;
         }
+
+        .tenlength-over {
+          font-size: 0.7rem;
+        }
       }
     }
   }
@@ -393,6 +397,7 @@ ons-toolbar {
   text-align: left;
 
   .card {
+    position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -403,8 +408,8 @@ ons-toolbar {
     font-size: 0.85rem;
     font-weight: bold;
     color: #ffa07a;
-    box-shadow: 1px 1px 3px 1px rgba(0,0,0,0.15);
-    border: 0.5px solid #ffa07a;
+    box-shadow: 1px 1px 3px 1px rgba(0,0,0,0.12);
+    border: 1px solid #ffa07a;
     margin: 1vw 1vw;
 
     &.add {
@@ -412,14 +417,24 @@ ons-toolbar {
     }
 
     &__inner {
+      position: absolute;
       text-align: center;
 
       .plus-icon {
         font-size: 1.6rem;
       }
 
-      p {
+      .plus-text {
         margin: 10px 0 0;
+      }
+
+      p {
+        margin: 0;
+        font-size: 0.9rem;
+      }
+
+      span {
+        font-size: 0.8rem;
       }
     }
   }
