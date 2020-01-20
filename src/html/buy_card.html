@@ -7,7 +7,7 @@
     </div>
     <div class="center">買い物カード</div>
     <div class="right">
-      <span>登録</span>
+      <span>編集</span>
     </div>
   </ons-toolbar>
 
@@ -15,42 +15,62 @@
     <div class="card" ng-click="$ctrl.plusCard();">
       <div class="card__inner">
         <p>卵</p>
+        <span>1パック</span>
       </div>
     </div>
     <div class="card" ng-click="$ctrl.plusCard();">
       <div class="card__inner">
         <p>ハム</p>
+        <span>2袋</span>
       </div>
     </div>
     <div class="card" ng-click="$ctrl.plusCard();">
       <div class="card__inner">
         <p>お米</p>
+        <span>5kg</span>
       </div>
     </div>
     <div class="card" ng-click="$ctrl.plusCard();">
       <div class="card__inner">
         <p>味噌</p>
+        <span>1</span>
       </div>
     </div>
     <div class="card" ng-click="$ctrl.plusCard();">
       <div class="card__inner">
         <p>もも肉</p>
+        <span>200g</span>
       </div>
     </div>
     <div class="card" ng-click="$ctrl.plusCard();">
       <div class="card__inner">
         <p>ごぼう</p>
+        <span>一本</span>
       </div>
     </div>
-    <div class="card add" ng-click="$ctrl.plusCard();">
+    <div class="card add" ng-click="cardInputDialog.show();">
       <div class="card__inner">
         <ons-icon class="plus-icon" icon="fa-plus"></ons-icon>
-        <p>カードを追加</p>
+        <p class="plus-text">カードを追加</p>
       </div>
     </div>
   </div>
 
   <ons-bottom-toolbar>
   </ons-bottom-toolbar>
+
+  <ons-dialog class="item-input__dialog" var="cardInputDialog" ons-postHide="$ctrl.resetVal();" cancelable>
+    <div class="item-text--wrapper" onclick="this.querySelector('input').focus()">
+      <input class="item-text__input" type="text" placeholder="カード名" name="買い物アイテム名" ng-model="$ctrl.itemName" jp-input>
+    </div>
+    <div class="item-num--wrapper" onclick="this.querySelector('input').focus()">
+      <input class="item-num__input" type="text" placeholder="数量" name="買い物アイテム数" ng-model="$ctrl.itemNum" jp-input>
+    </div>
+    <div class="item-add--wrapper">
+      <ons-button class="item-add__button" ng-click="$ctrl.addItem();">
+        <span>登録</span>
+      </ons-butoon>
+    </div>
+  </ons-dialog>
 
 </ons-page>

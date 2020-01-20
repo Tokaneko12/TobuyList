@@ -162,6 +162,10 @@ ons-splitter-side[side="left"][animation="overlay"] {
   }
 }
 
+/********************
+ 共通CSS
+********************/
+
 $toolbarIconColor: #ffa07a;
 
 :checked + .checkbox__checkmark:before {
@@ -222,6 +226,10 @@ ons-toolbar {
   }
 }
 
+/********************
+ 買うもの一覧CSS
+********************/
+
 .main--wrapper {
   height: 100%;
 
@@ -272,6 +280,10 @@ ons-toolbar {
         .line-through {
           text-decoration: line-through;
         }
+
+        .tenlength-over {
+          font-size: 0.7rem;
+        }
       }
     }
   }
@@ -288,6 +300,18 @@ ons-toolbar {
     }
   }
 }
+
+.back-button {
+  padding: 0 10px 0 15px;
+}
+
+.back-button__icon {
+  fill: #ffa07a;
+}
+
+/********************
+ 項目入力ダイアログCSS
+********************/
 
 .item-input__dialog {
 
@@ -338,6 +362,10 @@ ons-toolbar {
   }
 }
 
+/********************
+ 共通メニューCSS
+********************/
+
 .menu-list--wrapper {
   margin-top: 30px;
 
@@ -378,13 +406,67 @@ ons-toolbar {
   }
 }
 
-.back-button {
-  padding: 0 10px 0 15px;
+/********************
+ 日記CSS
+********************/
+
+.diary--wraper {
+
 }
 
-.back-button__icon {
-  fill: #ffa07a;
+.diary {
+  &-item {
+    display: flex;
+    align-items: center;
+    height: 70px;
+    margin: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid #bcbcbc;
+
+    .date {
+      width: 20%;
+      height: 100%;
+      text-align: center;
+      border-right: 1px solid #fff;
+      background-color: #ffa07a;
+      color: #fff;
+
+      p {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        margin: 0;
+
+        span {
+        }
+      }
+
+      &-num {
+        height: 70%;
+        font-size: 1rem;
+        font-weight: bold;
+        border-bottom: 1px solid #fff;
+      }
+
+      &-month {
+        height: 30%;
+        font-size: 0.8rem;
+      }
+    }
+
+    .time {
+      width: 80%;
+      text-align: center;
+    }
+  }
 }
+
+
+
+/********************
+ 買い物カードCSS
+********************/
 
 .wrap {
   padding: 20px 0;
@@ -393,6 +475,7 @@ ons-toolbar {
   text-align: left;
 
   .card {
+    position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -403,8 +486,8 @@ ons-toolbar {
     font-size: 0.85rem;
     font-weight: bold;
     color: #ffa07a;
-    box-shadow: 1px 1px 3px 1px rgba(0,0,0,0.15);
-    border: 0.5px solid #ffa07a;
+    box-shadow: 1px 1px 3px 1px rgba(0,0,0,0.12);
+    border: 1px solid #ffa07a;
     margin: 1vw 1vw;
 
     &.add {
@@ -412,14 +495,24 @@ ons-toolbar {
     }
 
     &__inner {
+      position: absolute;
       text-align: center;
 
       .plus-icon {
         font-size: 1.6rem;
       }
 
-      p {
+      .plus-text {
         margin: 10px 0 0;
+      }
+
+      p {
+        margin: 0;
+        font-size: 0.9rem;
+      }
+
+      span {
+        font-size: 0.8rem;
       }
     }
   }
