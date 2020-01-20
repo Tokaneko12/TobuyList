@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*****************
  *** Custom CSS ***
  *****************/
@@ -123,6 +124,9 @@ ons-splitter-side[side="left"][animation="overlay"] {
     opacity: 0.1;
     height: 0; } }
 
+/********************
+ 共通CSS
+********************/
 :checked + .checkbox__checkmark:before {
   background: #ffa07a;
   border: none; }
@@ -166,6 +170,9 @@ ons-toolbar .right {
     font-size: 1.8rem;
     color: #ffa07a; }
 
+/********************
+ 買うもの一覧CSS
+********************/
 .main--wrapper {
   height: 100%; }
   .main--wrapper .buy-list--wrapper {
@@ -215,6 +222,15 @@ ons-toolbar .right {
       margin: 0 auto;
       font-weight: bold; }
 
+.back-button {
+  padding: 0 10px 0 15px; }
+
+.back-button__icon {
+  fill: #ffa07a; }
+
+/********************
+ 項目入力ダイアログCSS
+********************/
 .item-input__dialog input::-webkit-input-placeholder {
   position: relative;
   opacity: 0.4;
@@ -254,6 +270,9 @@ ons-toolbar .right {
     margin: 0 auto;
     font-weight: bold; }
 
+/********************
+ 共通メニューCSS
+********************/
 .menu-list--wrapper {
   margin-top: 30px; }
   .menu-list--wrapper .menu-list {
@@ -279,12 +298,49 @@ ons-toolbar .right {
     width: 8px;
     height: 8px; }
 
-.back-button {
-  padding: 0 10px 0 15px; }
+/********************
+ 日記CSS
+********************/
+.diary-item {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+          align-items: center;
+  height: 70px;
+  margin: 5px 10px;
+  border-radius: 5px;
+  border: 1px solid #bcbcbc; }
+  .diary-item .date {
+    width: 20%;
+    height: 100%;
+    text-align: center;
+    border-right: 1px solid #fff;
+    background-color: #ffa07a;
+    color: #fff; }
+    .diary-item .date p {
+      display: -webkit-box;
+      display: flex;
+      -webkit-box-align: center;
+              align-items: center;
+      -webkit-box-pack: center;
+              justify-content: center;
+      position: relative;
+      margin: 0; }
+    .diary-item .date-num {
+      height: 70%;
+      font-size: 1rem;
+      font-weight: bold;
+      border-bottom: 1px solid #fff; }
+    .diary-item .date-month {
+      height: 30%;
+      font-size: 0.8rem; }
+  .diary-item .time {
+    width: 80%;
+    text-align: center; }
 
-.back-button__icon {
-  fill: #ffa07a; }
-
+/********************
+ 買い物カードCSS
+********************/
 .wrap {
   padding: 20px 0;
   margin: 0 2vw;
