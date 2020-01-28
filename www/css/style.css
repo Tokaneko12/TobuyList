@@ -231,7 +231,7 @@ ons-toolbar .right {
 /********************
  項目入力ダイアログCSS
 ********************/
-.item-input__dialog input::-webkit-input-placeholder {
+.item-input__dialog .ios-input::-webkit-input-placeholder {
   position: relative;
   opacity: 0.4;
   top: -0.2rem; }

@@ -1,4 +1,4 @@
-<ons-page id="buyDiaryPage" ng-controller="buyDiaryController as $ctrl">
+<ons-page id="buyDiaryPage" ng-controller="buyDiaryController as $ctrl" ng-init="$ctrl.initialize();">
 
   <ons-toolbar>
     <div class="left">
@@ -12,30 +12,18 @@
 
   <div class="diary--wraper">
     <div class="diary">
-      <div class="diary-item">
+      <div class="diary-item" ng-repeat="buyRecord in $ctrl.allBuyRecord">
         <div class="date">
           <p class="date-num">
-            <span>15(水)</span>
+            <span>{{buyRecord.createAt | date: 'd'}}({{buyRecord.createAt | date: 'EEE'}})</span>
           </p>
           <p class="date-month">
-            <span>1月</span>
+            <span>{{buyRecord.createAt | date: 'M'}}月</span>
           </p>
         </div>
         <div class="time">
-          12時15分の買い物
+          {{buyRecord.createAt | date: 'H'}}時{{buyRecord.createAt | date: 'm'}}分の買い物
         </div>
-      </div>
-      <div class="diary-item">
-        あ
-      </div>
-      <div class="diary-item">
-        あ
-      </div>
-      <div class="diary-item">
-        あ
-      </div>
-      <div class="diary-item">
-        あ
       </div>
     </div>
   </div>

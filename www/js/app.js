@@ -59,9 +59,24 @@ Module.controller('buyCardController', function() {
   }
 });
 
-Module.controller('buyDiaryController', function() {
+Module.controller('buyDiaryController', ['$scope', function($scope) {
   var $ctrl = this;
-});
+
+  // 日記データ読み込み
+  $ctrl.initialize = function() {
+    $ctrl.allBuyRecord = [];
+    var buyItemsRef = db.collection("buyItems");
+    console.log(authUser.uid);
+    buyItemsRef.where("uid", "==", authUser.uid).get()
+    .then(function(querySnapshot) {
+      querySnapshot.forEach(function(doc) {
+        // doc.data() is never undefined for query doc snapshots
+        $ctrl.allBuyRecord.push(doc.data());
+        $scope.$apply();
+      });
+    })
+  }
+}]);
 
 Module.controller('MenuController', function() {
   var $ctrl = this;
@@ -79,21 +94,19 @@ Module.controller('MenuController', function() {
 });
 
 Module.controller('SplitterController', function() {
-<<<<<<< HEAD
   var $ctrl = this;
   $ctrl.aaa = function() {
     console.log("aaa");
   }
-=======
->>>>>>> localstorage追加
 });
 
 Module.controller('TabbarController', ['$scope' ,function($scope) {
   var $ctrl = this;
   $ctrl.buyItems = localStorage.getItem('buyItems') ? JSON.parse(localStorage.getItem('buyItems')) : [];
-  console.log($ctrl.buyItems);
   $ctrl.itemName = "";
   $ctrl.modifyMode = false;
+
+  if(ons.platform.isIOS) $ctrl.isIOS = true;
 
   // 買いものアイテムの追加
   $ctrl.addItem = function() {
@@ -101,7 +114,6 @@ Module.controller('TabbarController', ['$scope' ,function($scope) {
       name: $ctrl.itemName,
       check: false,
       number: $ctrl.itemNum,
-      uid: authUser.uid,
     };
     if($ctrl.modifyIdx >= 0) {
       $ctrl.buyItems.splice($ctrl.modifyIdx, 1, buyObj);
@@ -109,8 +121,6 @@ Module.controller('TabbarController', ['$scope' ,function($scope) {
       $ctrl.buyItems.push(buyObj);
     }
     localStorage.setItem('buyItems', JSON.stringify($ctrl.buyItems));
-    console.log($ctrl.buyItems);
-    console.log(localStorage.getItem('buyItems'));
     itemInputDialog.hide();
   }
 
@@ -149,6 +159,11 @@ Module.controller('TabbarController', ['$scope' ,function($scope) {
 
   // 買い物完了
   $ctrl.compBuy = function() {
+    var buyList = {
+      createAt: new Date().getTime(),
+      items: $ctrl.buyItems,
+      uid: authUser.uid
+    }
 
     ons.notification.confirm({
       title: '',
@@ -156,18 +171,17 @@ Module.controller('TabbarController', ['$scope' ,function($scope) {
       cancelable: true,
       callback: function(inx) {
         if(inx == 1) { // OKを押したときの処理
-          $ctrl.buyItems = [];
-          localStorage.setItem('buyItems', JSON.stringify($ctrl.buyItems));
-          $scope.$apply();
+          db.collection("buyItems").add(buyList)
+          .then(function(){
+            $ctrl.buyItems = [];
+            localStorage.setItem('buyItems', JSON.stringify($ctrl.buyItems));
+            $scope.$apply();
+          }).catch(function(error) {
+            console.log(error);
+          });
         }
       }
     });
-
-    // db.collection("buyItems").add({
-    //   name: "Los Angeles",
-    //   state: "CA",
-    //   country: "USA"
-    // })
   }
 
   $ctrl.resetVal = function() {
