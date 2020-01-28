@@ -315,7 +315,7 @@ ons-toolbar {
 
 .item-input__dialog {
 
-  input::-webkit-input-placeholder {
+  .ios-input::-webkit-input-placeholder {
     position: relative;
     opacity: 0.4;
     top: -0.2rem;
