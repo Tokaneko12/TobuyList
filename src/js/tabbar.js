@@ -1,6 +1,7 @@
 Module.controller('TabbarController', ['$scope' ,function($scope) {
   var $ctrl = this;
-  $ctrl.buyItems = [];
+  $ctrl.buyItems = localStorage.getItem('buyItems') ? JSON.parse(localStorage.getItem('buyItems')) : [];
+  console.log($ctrl.buyItems);
   $ctrl.itemName = "";
   $ctrl.modifyMode = false;
 
@@ -17,6 +18,9 @@ Module.controller('TabbarController', ['$scope' ,function($scope) {
     } else if($ctrl.itemName.length > 0) {
       $ctrl.buyItems.push(buyObj);
     }
+    localStorage.setItem('buyItems', JSON.stringify($ctrl.buyItems));
+    console.log($ctrl.buyItems);
+    console.log(localStorage.getItem('buyItems'));
     itemInputDialog.hide();
   }
 
@@ -47,6 +51,7 @@ Module.controller('TabbarController', ['$scope' ,function($scope) {
       }
       if(index == 1) {
         $ctrl.buyItems.splice(buyIdx, 1);
+        localStorage.setItem('buyItems', JSON.stringify($ctrl.buyItems));
         $scope.$apply();
       }
     })
@@ -54,12 +59,18 @@ Module.controller('TabbarController', ['$scope' ,function($scope) {
 
   // 買い物完了
   $ctrl.compBuy = function() {
-    $ctrl.buyItems = [];
 
     ons.notification.confirm({
       title: '',
       message: '買い物を完了しますか？',
       cancelable: true,
+      callback: function(inx) {
+        if(inx == 1) { // OKを押したときの処理
+          $ctrl.buyItems = [];
+          localStorage.setItem('buyItems', JSON.stringify($ctrl.buyItems));
+          $scope.$apply();
+        }
+      }
     });
 
     // db.collection("buyItems").add({
