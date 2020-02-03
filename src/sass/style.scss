@@ -411,7 +411,7 @@ ons-toolbar {
 ********************/
 
 .diary--wraper {
-
+  padding-top: 20px;
 }
 
 .diary {
@@ -514,6 +514,23 @@ ons-toolbar {
       span {
         font-size: 0.8rem;
       }
+    }
+
+    label {
+      position: absolute;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid #eee;
+      border-radius: 8px;
+    }
+
+    ons-checkbox {
+      position: absolute;
+      z-index: 10;
+      right: 5px;
+      bottom: 5px;
     }
   }
 }
