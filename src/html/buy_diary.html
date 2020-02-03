@@ -12,7 +12,7 @@
 
   <div class="diary--wraper">
     <div class="diary">
-      <div class="diary-item" ng-repeat="buyRecord in $ctrl.allBuyRecord">
+      <div class="diary-item" ng-repeat="buyRecord in $ctrl.allBuyRecord | orderBy: 'createAt'">
         <div class="date">
           <p class="date-num">
             <span>{{buyRecord.createAt | date: 'd'}}({{buyRecord.createAt | date: 'EEE'}})</span>
