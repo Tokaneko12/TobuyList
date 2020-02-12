@@ -2,17 +2,17 @@
 
   <ons-toolbar>
     <div class="left">
-      <ons-back-button>
-      </ons-back-button>
+      <ons-back-button ng-click="$ctrl.backPage();"></ons-back-button>
     </div>
     <div class="center">買い物カード</div>
-    <div class="right">
-      <span>編集</span>
+    <div class="right" ng-click="$ctrl.modeChange();">
+      <span ng-if="!$ctrl.deleteMode">選択</span>
+      <span class="delete" ng-if="$ctrl.deleteMode">終了</span>
     </div>
   </ons-toolbar>
 
   <div class="wrap">
-    <div class="card" ng-repeat="card in $ctrl.allBuyCard | orderBy: 'createAt'" ng-click="$ctrl.checkCard(card, $index);">
+    <div class="card" ng-class="{shiver: $ctrl.deleteMode}" ng-repeat="card in $ctrl.allBuyCard | orderBy: 'createAt'" ng-click="$ctrl.checkCard(card, $index);">
       <div class="card__inner">
         <p>{{card.name}}</p>
         <span>{{card.number}}</span>
@@ -20,6 +20,7 @@
       <label for="cardId{{$index}}" ng-click="$event.stopPropagation();" ng-if="card.checked"">
       </label>
       <ons-checkbox input-id="cardId{{$index}}" ng-model="card.checked" ng-if="card.checked"></ons-checkbox>
+      <ons-icon class="minus-icon" icon="fa-minus-circle" ng-click="$ctrl.deleteCard();$event.stopPropagation();" ng-if="$ctrl.deleteMode"></ons-icon>
     </div>
     <div class="card add" ng-click="cardInputDialog.show();">
       <div class="card__inner">
@@ -28,9 +29,6 @@
       </div>
     </div>
   </div>
-
-  <ons-bottom-toolbar>
-  </ons-bottom-toolbar>
 
   <ons-dialog class="item-input__dialog" var="cardInputDialog" ons-postHide="$ctrl.resetVal();" cancelable>
     <div class="item-text--wrapper" onclick="this.querySelector('input').focus()">

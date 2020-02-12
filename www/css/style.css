@@ -151,9 +151,15 @@ ons-toolbar .toolbar-button {
   border: none; }
 
 ons-toolbar .left {
-  width: 15%; }
+  width: 20%; }
   ons-toolbar .left img {
     width: 24px; }
+  ons-toolbar .left .mode-end {
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+    color: #000;
+    font-weight: bold; }
 
 ons-toolbar .center {
   width: 70%;
@@ -161,7 +167,7 @@ ons-toolbar .center {
   text-align: center; }
 
 ons-toolbar .right {
-  width: 15%;
+  width: 20%;
   text-align: center; }
   ons-toolbar .right span {
     color: #ffa07a;
@@ -169,6 +175,8 @@ ons-toolbar .right {
   ons-toolbar .right ons-icon {
     font-size: 1.8rem;
     color: #ffa07a; }
+  ons-toolbar .right .delete {
+    color: #696969; }
 
 /********************
  買うもの一覧CSS
@@ -349,6 +357,40 @@ ons-toolbar .right {
   margin: 0 2vw;
   font-size: 0;
   text-align: left; }
+
+@-webkit-keyframes shiver {
+  0% {
+    -webkit-transform: translate(0px, 0px) rotateZ(0deg);
+            transform: translate(0px, 0px) rotateZ(0deg); }
+  25% {
+    -webkit-transform: translate(1px, 1px) rotateZ(1deg);
+            transform: translate(1px, 1px) rotateZ(1deg); }
+  50% {
+    -webkit-transform: translate(0px, 1px) rotateZ(0deg);
+            transform: translate(0px, 1px) rotateZ(0deg); }
+  75% {
+    -webkit-transform: translate(1px, 0px) rotateZ(-1deg);
+            transform: translate(1px, 0px) rotateZ(-1deg); }
+  100% {
+    -webkit-transform: translate(0px, 0px) rotateZ(0deg);
+            transform: translate(0px, 0px) rotateZ(0deg); } }
+
+@keyframes shiver {
+  0% {
+    -webkit-transform: translate(0px, 0px) rotateZ(0deg);
+            transform: translate(0px, 0px) rotateZ(0deg); }
+  25% {
+    -webkit-transform: translate(1px, 1px) rotateZ(1deg);
+            transform: translate(1px, 1px) rotateZ(1deg); }
+  50% {
+    -webkit-transform: translate(0px, 1px) rotateZ(0deg);
+            transform: translate(0px, 1px) rotateZ(0deg); }
+  75% {
+    -webkit-transform: translate(1px, 0px) rotateZ(-1deg);
+            transform: translate(1px, 0px) rotateZ(-1deg); }
+  100% {
+    -webkit-transform: translate(0px, 0px) rotateZ(0deg);
+            transform: translate(0px, 0px) rotateZ(0deg); } }
   .wrap .card {
     position: relative;
     display: -webkit-inline-box;
@@ -367,6 +409,9 @@ ons-toolbar .right {
     box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.12);
     border: 1px solid #ffa07a;
     margin: 1vw 1vw; }
+    .wrap .card.shiver {
+      -webkit-animation: shiver .4s  infinite;
+              animation: shiver .4s  infinite; }
     .wrap .card.add {
       border: none; }
     .wrap .card__inner {
@@ -394,3 +439,13 @@ ons-toolbar .right {
       z-index: 10;
       right: 5px;
       bottom: 5px; }
+    .wrap .card .minus-icon {
+      position: absolute;
+      z-index: 1000;
+      padding: 10px;
+      top: -20px;
+      right: -20px;
+      font-size: 1.5rem; }
+    .wrap .card .fa-minus-circle:before {
+      background: #fff;
+      border-radius: 50%; }

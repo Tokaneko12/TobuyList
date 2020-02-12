@@ -55,6 +55,8 @@ Module.directive('jpInput', ['$parse', function($parse) {
 Module.controller('buyCardController', ['$scope', function($scope) {
   var $ctrl = this;
   if(ons.platform.isIOS) $ctrl.isIOS = true;
+  $ctrl.buyItems = localStorage.getItem('buyItems') ? JSON.parse(localStorage.getItem('buyItems')) : [];
+  $ctrl.buyItemsCopy = localStorage.getItem('buyItems') ? angular.copy(JSON.parse(localStorage.getItem('buyItems'))) : [];
 
   // 初期処理
   $ctrl.initialize = function() {
@@ -63,14 +65,25 @@ Module.controller('buyCardController', ['$scope', function($scope) {
     cardItemsRef.where("uid", "==", authUser.uid).get()
     .then(function(querySnapshot) {
       querySnapshot.forEach(function(doc) {
-        // doc.data() is never undefined for query doc snapshots
         $ctrl.allBuyCard.push(doc.data());
         $scope.$apply();
       });
     })
   }
 
-  $ctrl.initialize();
+  // 戻るボタン処理
+  $ctrl.backPage = function() {
+    // localStorage.setItem('buyItems', JSON.stringify($ctrl.buyItems));
+    splitterNav.popPage();
+  }
+
+  $ctrl.modeChange = function() {
+    console.log($ctrl.buyItems.length);
+    console.log($ctrl.buyItemsCopy.length);
+
+    $ctrl.buyItems = localStorage.getItem('buyItems') ? JSON.parse(localStorage.getItem('buyItems')) : [];
+    $ctrl.deleteMode = !$ctrl.deleteMode ? true : false;
+  }
 
   // 買い物カード追加処理
   $ctrl.plusCard = function() {
@@ -87,6 +100,7 @@ Module.controller('buyCardController', ['$scope', function($scope) {
       cancelable: true,
       callback: function(inx) {
         if(inx == 1) { // OKを押したときの処理
+          console.log("aaa");
           db.collection("cardItems").add(cardItem)
           .then(function(){
             $ctrl.allBuyCard.push(cardItem);
@@ -102,23 +116,27 @@ Module.controller('buyCardController', ['$scope', function($scope) {
 
   // 買い物カードタップ時のチェック処理
   $ctrl.checkCard = function(card, idx) {
-    $ctrl.buyItems = localStorage.getItem('buyItems') ? JSON.parse(localStorage.getItem('buyItems')) : [];
-    console.log(card);
+    if($ctrl.deleteMode) {
 
-    if(!card.checked) { // カードにチェックを付けるとき
-      var buyObj = {
-        name: card.name,
-        check: false,
-        number: card.number,
-        cardIdx: idx,
-      };
+    } else {
+      if(!card.checked) { // カードにチェックを付けるとき
+        var buyObj = {
+          name: card.name,
+          check: false,
+          number: card.number,
+          cardIdx: idx,
+        };
 
-      // $ctrl.buyItems.push(buyObj);
-      // localStorage.setItem('buyItems', JSON.stringify($ctrl.buyItems));
-      card.checked = true;
-    } else { // カードからチェックを外すとき
-      console.log($ctrl.buyItems);
+        $ctrl.buyItems.push(buyObj);
+        card.checked = true;
+      } else { // カードからチェックを外すとき
+        console.log($ctrl.buyItems);
+      }
     }
+  }
+
+  // 買い物カードマイナスボタンタップ時処理
+  $ctrl.deleteCard = function() {
 
   }
 

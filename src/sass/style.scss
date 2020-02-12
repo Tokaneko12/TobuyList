@@ -198,9 +198,17 @@ ons-toolbar {
   }
 
   .left {
-    width: 15%;
+    width: 20%;
     img {
       width: 24px;
+    }
+
+    .mode-end {
+      display: block;
+      text-align: center;
+      margin: 0 auto;
+      color: #000;
+      font-weight: bold;
     }
   }
 
@@ -211,7 +219,7 @@ ons-toolbar {
   }
 
   .right {
-    width: 15%;
+    width: 20%;
     text-align: center;
 
     span {
@@ -222,6 +230,10 @@ ons-toolbar {
     ons-icon {
       font-size: 1.8rem;
       color: #ffa07a;
+    }
+
+    .delete {
+      color: #696969;
     }
   }
 }
@@ -474,6 +486,14 @@ ons-toolbar {
   font-size: 0;
   text-align: left;
 
+  @keyframes shiver {
+    0% {transform: translate(0px, 0px) rotateZ(0deg)}
+    25% {transform: translate(1px, 1px) rotateZ(1deg)}
+    50% {transform: translate(0px, 1px) rotateZ(0deg)}
+    75% {transform: translate(1px, 0px) rotateZ(-1deg)}
+    100% {transform: translate(0px, 0px) rotateZ(0deg)}
+  }
+
   .card {
     position: relative;
     display: inline-flex;
@@ -489,6 +509,10 @@ ons-toolbar {
     box-shadow: 1px 1px 3px 1px rgba(0,0,0,0.12);
     border: 1px solid #ffa07a;
     margin: 1vw 1vw;
+
+    &.shiver {
+      animation: shiver .4s  infinite;
+    }
 
     &.add {
       border: none;
@@ -531,6 +555,20 @@ ons-toolbar {
       z-index: 10;
       right: 5px;
       bottom: 5px;
+    }
+
+    .minus-icon {
+      position: absolute;
+      z-index: 1000;
+      padding: 10px;
+      top: -20px;
+      right: -20px;
+      font-size: 1.5rem;
+    }
+
+    .fa-minus-circle:before {
+      background: #fff;
+      border-radius: 50%;
     }
   }
 }
