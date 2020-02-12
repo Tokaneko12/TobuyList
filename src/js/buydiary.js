@@ -5,7 +5,6 @@ Module.controller('buyDiaryController', ['$scope', function($scope) {
   $ctrl.initialize = function() {
     $ctrl.allBuyRecord = [];
     var buyItemsRef = db.collection("buyItems");
-    console.log(authUser.uid);
     buyItemsRef.where("uid", "==", authUser.uid).get()
     .then(function(querySnapshot) {
       querySnapshot.forEach(function(doc) {

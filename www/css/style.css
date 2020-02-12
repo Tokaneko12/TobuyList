@@ -411,7 +411,8 @@ ons-toolbar .right {
     margin: 1vw 1vw; }
     .wrap .card.shiver {
       -webkit-animation: shiver .4s  infinite;
-              animation: shiver .4s  infinite; }
+              animation: shiver .4s  infinite;
+      z-index: 10; }
     .wrap .card.add {
       border: none; }
     .wrap .card__inner {

@@ -1,10 +1,14 @@
-Module.controller('TabbarController', ['$scope' ,function($scope) {
+Module.controller('TabbarController', ['$scope', function($scope) {
   var $ctrl = this;
   $ctrl.buyItems = localStorage.getItem('buyItems') ? JSON.parse(localStorage.getItem('buyItems')) : [];
   $ctrl.itemName = "";
   $ctrl.modifyMode = false;
 
   if(ons.platform.isIOS) $ctrl.isIOS = true;
+
+  $scope.$on('updateItems', function(){
+    $ctrl.buyItems = localStorage.getItem('buyItems') ? JSON.parse(localStorage.getItem('buyItems')) : [];
+  });
 
   // 買いものアイテムの追加
   $ctrl.addItem = function() {
