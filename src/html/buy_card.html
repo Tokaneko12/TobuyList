@@ -20,7 +20,7 @@
       <label for="cardId{{$index}}" ng-click="$event.stopPropagation();" ng-if="card.checked"">
       </label>
       <ons-checkbox input-id="cardId{{$index}}" ng-model="card.checked" ng-if="card.checked"></ons-checkbox>
-      <ons-icon class="minus-icon" icon="fa-minus-circle" ng-click="$ctrl.deleteCard();$event.stopPropagation();" ng-if="$ctrl.deleteMode"></ons-icon>
+      <ons-icon class="minus-icon" icon="fa-minus-circle" ng-click="$ctrl.deleteCard(card);$event.stopPropagation();" ng-if="$ctrl.deleteMode"></ons-icon>
     </div>
     <div class="card add" ng-click="cardInputDialog.show();">
       <div class="card__inner">

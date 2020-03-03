@@ -23,7 +23,7 @@ ons-splitter-side[side="left"][animation="overlay"] {
 .left-label {
   width: 30%;
   font-size: 16px;
-  color: #666
+  color: #666;
 }
 
 
@@ -512,6 +512,7 @@ ons-toolbar {
 
     &.shiver {
       animation: shiver .4s  infinite;
+      z-index: 10;
     }
 
     &.add {
