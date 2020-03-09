@@ -29,7 +29,7 @@ Module.controller('TabbarController', ['$scope', function($scope) {
   // 買い物アイテムメニューを開く
   $ctrl.openItemMenu = function(buyItem, buyIdx) {
     ons.openActionSheet({
-      title: '項目メニュー',
+      title: buyItem.name,
       cancelable: true,
       buttons: [
         '編集',
