@@ -14,4 +14,11 @@ Module.controller('buyDiaryController', ['$scope', function($scope) {
       });
     })
   }
+
+  // 日記詳細画面を開く
+  $ctrl.openRecord = function(record) {
+    diaryDialog.show();
+    console.log(record);
+    $ctrl.recordItems = record.items;
+  }
 }]);

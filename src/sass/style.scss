@@ -257,7 +257,8 @@ ons-toolbar {
 
     .buy-list {
       background: none;
-      height: 80%;
+      height: calc(44px * 8.6);
+      overflow-y: scroll;
 
       &__item {
         position: relative;
@@ -471,6 +472,19 @@ ons-toolbar {
       width: 80%;
       text-align: center;
     }
+  }
+}
+
+.diary-dialog {
+  .dialog {
+    top: 50%;
+    width: 90%;
+    height: 80%;
+    bottom: auto;
+  }
+
+  .dialog-container {
+    height: 100%;
   }
 }
 

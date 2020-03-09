@@ -68,16 +68,16 @@
           </ons-list>
         </div>
         <div class="button--wrapper">
-          <ons-button class="comp-button" ng-click="$ctrl.compBuy();">買い物完了</ons-button>
+          <ons-button class="comp-button" ng-click="$ctrl.compBuy();" ng-disabled="$ctrl.buyItems.length < 1">買い物完了</ons-button>
         </div>
       </div>
 
       <ons-dialog class="item-input__dialog" var="itemInputDialog" ons-postHide="$ctrl.resetVal();" cancelable>
         <div class="item-text--wrapper" onclick="this.querySelector('input').focus()">
-          <input class="item-text__input" ng-class="{'ios-input': $ctrl.isIOS}" type="text" placeholder="項目名(15文字以内)" name="買い物アイテム名" ng-model="$ctrl.itemName" jp-input>
+          <input class="item-text__input" ng-class="{'ios-input': $ctrl.isIOS}" type="text" placeholder="項目名" name="買い物アイテム名" ng-model="$ctrl.itemName" jp-input>
         </div>
         <div class="item-num--wrapper" onclick="this.querySelector('input').focus()">
-          <input class="item-num__input" ng-class="{'ios-input': $ctrl.isIOS}" type="text" placeholder="数量(8文字以内)" name="買い物アイテム数" ng-model="$ctrl.itemNum" jp-input>
+          <input class="item-num__input" ng-class="{'ios-input': $ctrl.isIOS}" type="text" placeholder="数量" name="買い物アイテム数" ng-model="$ctrl.itemNum" jp-input>
         </div>
         <div class="item-add--wrapper">
           <ons-button class="item-add__button" ng-click="$ctrl.addItem();">
