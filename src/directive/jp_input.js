@@ -3,10 +3,8 @@ Module.directive('jpInput', ['$parse', function($parse) {
   return {
     priority: 2,
     restrict: 'A',
-    compile: function(element) {
-      element.on('compositionstart', function(e) {
-        e.stopImmediatePropagation();
-      });
+    link: function(scope, element) {
+      element.off('compositionstart').off('compositionend');
     },
   };
 }]);

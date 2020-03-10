@@ -86,6 +86,40 @@ Module.controller('TabbarController', ['$scope', function($scope) {
     });
   }
 
+  $ctrl.openShare = function() {
+    var message = '';
+    for(var i = 0; i < $ctrl.buyItems.length; i++) {
+      var str = $ctrl.buyItems[i].name + ':\t' + $ctrl.buyItems[i].items + '\n';
+      message += str;
+    }
+    if(window.plugins) {
+      var options = {
+        message: message, // デフォルトメッセージ (Instagram, facebookは対応外)
+        subject: '', // メールのデフォルト副題
+        files: [], // 画像データ(配列形式必須)
+        chooserTitle: '共有するアプリケーションを選択', // Androidのシェアシートapp選択タイトル,
+        appPackageName: 'com.apple.social.facebook' // Android only, you can provide id of the App you want to share with
+      };
+
+      var onSuccess = function(result) {
+        if(!result.completed) return;
+        ons.notification.confirm({
+          title: '',
+          message: '投稿をシェアしました',
+          buttonLabel: 'OK',
+          animation: 'default',
+        });
+      };
+
+      var onError = function(msg) {
+        console.log("Sharing failed with message: " + msg);
+      };
+
+      window.plugins.socialsharing.shareWithOptions(options, onSuccess, onError);
+    }
+  }
+
+  // 項目リセット処理
   $ctrl.resetVal = function() {
     $ctrl.modifyIdx = -1;
     $ctrl.modifyMode = false;
