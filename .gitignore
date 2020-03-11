@@ -5,4 +5,7 @@
 *.swp
 .vscode/
 node_modules
-/www/
+/www/index.html
+/www/css
+/www/html
+/www/js
