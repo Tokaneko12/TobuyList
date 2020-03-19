@@ -26,7 +26,21 @@ ons-splitter-side[side="left"][animation="overlay"] {
   color: #666;
 }
 
+.safeTop {
+  top: 20px;
+  /* iOS 10 以下の互換性を保つために20px */
+  top: constant(safe-area-inset-top);
+  /* iOS 11.2未満用 */
+  top: env(safe-area-inset-top);
+}
 
+.safeBtm {
+  /* iOS 11.2以上用 */
+  bottom: constant(safe-area-inset-bottom);
+  /* iOS 11.2未満用 */
+  bottom: env(safe-area-inset-bottom);
+  /* iOS 11.2以上用 */
+}
 
 /********************
  *** Animation CSS ***
