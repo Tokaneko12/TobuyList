@@ -1,5 +1,6 @@
 Module.controller('buyDiaryController', ['$scope', function($scope) {
   var $ctrl = this;
+  $ctrl.totalMonthMoney = 0;
 
   // 日記データ読み込み
   $ctrl.initialize = function() {
@@ -20,5 +21,15 @@ Module.controller('buyDiaryController', ['$scope', function($scope) {
     diaryDialog.show();
     console.log(record);
     $ctrl.recordItems = record.items;
+  }
+
+  // 日記に金額を登録
+  $ctrl.registMoney = function() {
+    console.log($ctrl.recordItems.money);
+    ons.notification.alert({
+      title: '',
+      message: '金額の登録が完了しました',
+      cancelable: false,
+    })
   }
 }]);

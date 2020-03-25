@@ -26,8 +26,6 @@ ons-splitter-side[side="left"][animation="overlay"] {
   color: #666;
 }
 
-
-
 /********************
  *** Animation CSS ***
  ********************/
@@ -200,7 +198,7 @@ ons-toolbar {
   .left {
     width: 20%;
     img {
-      width: 24px;
+      width: 28px;
     }
 
     .mode-end {
@@ -456,15 +454,10 @@ ons-toolbar {
       }
 
       &-num {
-        height: 70%;
+        height: 100%;
         font-size: 1rem;
         font-weight: bold;
         border-bottom: 1px solid #fff;
-      }
-
-      &-month {
-        height: 30%;
-        font-size: 0.8rem;
       }
     }
 
@@ -472,6 +465,15 @@ ons-toolbar {
       width: 80%;
       text-align: center;
     }
+  }
+}
+
+.diary-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  p {
+    margin: 0;
   }
 }
 
@@ -485,6 +487,76 @@ ons-toolbar {
 
   .dialog-container {
     height: 100%;
+  }
+
+  .record {
+    max-height: 70%;
+    overflow-y: scroll;
+  }
+
+  .record-list {
+    margin: 10px 20px;
+
+    &__item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px dashed #ccc;
+
+      &__name {
+      }
+
+      &__number {
+        text-align: right;
+      }
+    }
+  }
+
+  .record__relative {
+    width: calc(100% - (20px * 2));
+    margin: 0 0 0 20px;
+
+    p {
+      margin: 0;
+    }
+
+    &__money {
+      margin-top: 20px;
+      text-align: right;
+
+      input {
+        height: 20px;
+        padding: 5px;
+        font-size: 0.9rem;
+      }
+
+      .unit {
+        margin-left: 5px;
+      }
+    }
+
+    &__memo {
+      margin-top: 20px;
+
+      textarea {
+        width: 100%;
+        height: 80px;
+        padding: 5px;
+        resize: none;
+      }
+    }
+  }
+
+  ons-button {
+    position: absolute;
+    right: 0;
+    bottom: 30px;
+    left: 0;
+    display: block;
+    width: 70%;
+    text-align: center;
+    margin: 0 auto;
+    font-weight: bold;
   }
 }
 

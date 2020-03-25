@@ -5,20 +5,20 @@
       <ons-back-button>
       </ons-back-button>
     </div>
-    <div class="center">日記</div>
+    <div class="center">
+      <span ng-if="$ctrl.totalMonthMoney == 0">日記一覧</span>
+      <span ng-if="$ctrl.totalMonthMoney > 0">合計{{$ctrl.totalMonthMoney}}円</span>
+    </div>
     <div class="right">
     </div>
   </ons-toolbar>
 
   <div class="diary--wraper">
     <div class="diary">
-      <div class="diary-item" ng-repeat="buyRecord in $ctrl.allBuyRecord | orderBy: 'createAt'" ng-click="$ctrl.openRecord(buyRecord);">
+      <div class="diary-item" ng-repeat="buyRecord in $ctrl.allBuyRecord | orderBy: '-createAt'" ng-click="$ctrl.openRecord(buyRecord);">
         <div class="date">
           <p class="date-num">
             <span>{{buyRecord.createAt | date: 'd'}}({{buyRecord.createAt | date: 'EEE'}})</span>
-          </p>
-          <p class="date-month">
-            <span>{{buyRecord.createAt | date: 'M'}}月</span>
           </p>
         </div>
         <div class="time">
@@ -28,9 +28,30 @@
     </div>
   </div>
 
+  <ons-bottom-toolbar class="diary-bottom">
+    <p>{{$ctrl.allBuyRecord[0].createAt | date: 'M'}}月</p>
+  </ons-bottom-toolbar>
+
   <ons-dialog var="diaryDialog" class="diary-dialog" cancelable>
-    <div class="" ng-repeat="buyItem in $ctrl.recordItems">
-      {{buyItem.name}} {{buyItem.number}}
+    <div class="record">
+      <div class="record-list" ng-repeat="buyItem in $ctrl.recordItems">
+        <p class="record-list__item">
+          <span class="record-list__item__name">{{buyItem.name}}</span>
+          <span class="record-list__item__number">{{buyItem.number}}</span>
+        </p>
+      </div>
     </div>
+    <div class="record__relative">
+      <div class="record__relative__money">
+        <span>計</span>
+        <input type="number" ng-model="$ctrl.recordItems.money">
+        <span class="unit">円</span>
+      </div>
+      <!-- <div class="record__relative__memo">
+        <p>メモ</p>
+        <textarea ng-model="buyItem.memo" jp-input></textarea>
+      </div> -->
+    </div>
+    <ons-button ng-click="$ctrl.registMoney();">金額を登録</ons-button>
   </ons-dialog>
 </ons-page>
