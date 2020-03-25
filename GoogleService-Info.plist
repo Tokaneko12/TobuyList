@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>244020507559-2g5qnujshimu2isqcuar4s2m5j13ik8g.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.244020507559-2g5qnujshimu2isqcuar4s2m5j13ik8g</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBHDkyHRbE0UhUC5vUX_VIV3reHU0_OWHk</string>
+	<key>GCM_SENDER_ID</key>
+	<string>244020507559</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.app.buyList</string>
+	<key>PROJECT_ID</key>
+	<string>tobuy-86979</string>
+	<key>STORAGE_BUCKET</key>
+	<string>tobuy-86979.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:244020507559:ios:e8416fc653caff2a007c82</string>
+	<key>DATABASE_URL</key>
+	<string>https://tobuy-86979.firebaseio.com</string>
+</dict>
+</plist>
