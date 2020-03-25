@@ -17,7 +17,6 @@ Module.controller('buyCardController', ['$scope', '$rootScope', function($scope,
         cardData.checked = $ctrl.buyItems.some(function(item){
           if(item.cId == cardData.cId) return true;
         });
-        console.log(cardData);
         $ctrl.allBuyCard.push(cardData);
         $scope.$apply();
       });
@@ -80,7 +79,6 @@ Module.controller('buyCardController', ['$scope', '$rootScope', function($scope,
         return item.cId != card.cId;
       });
     }
-    console.log($ctrl.buyItems);
   }
 
   // 買い物カードマイナスボタンタップ時処理

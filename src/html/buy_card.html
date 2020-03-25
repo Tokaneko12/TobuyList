@@ -4,7 +4,7 @@
     <div class="left">
       <ons-back-button ng-click="$ctrl.backPage();"></ons-back-button>
     </div>
-    <div class="center">買い物カード</div>
+    <div class="center">カード一覧</div>
     <div class="right" ng-click="$ctrl.modeChange();">
       <span ng-if="!$ctrl.deleteMode">選択</span>
       <span class="delete" ng-if="$ctrl.deleteMode">終了</span>
@@ -25,7 +25,7 @@
     <div class="card add" ng-click="cardInputDialog.show();">
       <div class="card__inner">
         <ons-icon class="plus-icon" icon="fa-plus"></ons-icon>
-        <p class="plus-text">カードを追加</p>
+        <p class="plus-text">カードを登録</p>
       </div>
     </div>
   </div>
