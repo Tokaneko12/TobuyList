@@ -37,6 +37,7 @@ Module.controller('TabbarController', ['$scope', function($scope) {
           label: '削除',
           modifier: 'destructive'
         },
+        'カードに追加',
         {
           label: 'キャンセル',
           icon: 'md-close'
@@ -56,6 +57,31 @@ Module.controller('TabbarController', ['$scope', function($scope) {
         localStorage.setItem('buyItems', JSON.stringify($ctrl.buyItems));
         $scope.$apply();
       }
+      if(index == 2) {
+        ons.notification.confirm({
+          title: '',
+          message: 'カードに追加しますか？',
+          cancelable: true,
+          callback: function(inx) {
+            if(inx == 1) { // OKを押したときの処理
+              buyItem.uid = authUser.uid;
+              buyItem.docId = db.collection("cardItems").doc().id;
+              db.collection("cardItems").doc(buyItem.docId).set(buyItem)
+              .then(function(){
+                $scope.$apply();
+                ons.notification.alert({
+                  title: '',
+                  message: 'カードの追加が完了しました',
+                  cancelable: false,
+                })
+              }).catch(function(error) {
+                console.log(error);
+              });
+            }
+          }
+        });
+        $scope.$apply();
+      }
     })
   }
 
@@ -73,7 +99,8 @@ Module.controller('TabbarController', ['$scope', function($scope) {
       cancelable: true,
       callback: function(inx) {
         if(inx == 1) { // OKを押したときの処理
-          db.collection("buyItems").add(buyList)
+          buyList.docId = db.collection("buyItems").doc().id;
+          db.collection("buyItems").doc(buyList.docId).set(buyList)
           .then(function(){
             $ctrl.buyItems = [];
             localStorage.setItem('buyItems', JSON.stringify($ctrl.buyItems));

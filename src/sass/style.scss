@@ -42,10 +42,6 @@ ons-splitter-side[side="left"][animation="overlay"] {
   /* iOS 11.2以上用 */
 }
 
-/********************
- *** Animation CSS ***
- ********************/
-
 #tabbarPage .list {
   overflow-x: hidden;
   margin-top: -1px;
@@ -87,6 +83,10 @@ ons-splitter-side[side="left"][animation="overlay"] {
   -webkit-animation: remove .7s ease-in-out forwards;
           animation: remove .7s ease-in-out forwards;
 }
+
+/********************
+ *** Animation CSS ***
+ ********************/
 
 @-webkit-keyframes swipe-right {
   0% {
@@ -173,6 +173,24 @@ ons-splitter-side[side="left"][animation="overlay"] {
   100% {
     opacity: 0.1;
     height: 0;
+  }
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
 
@@ -449,6 +467,7 @@ ons-toolbar {
     margin: 5px 10px;
     border-radius: 5px;
     border: 1px solid #bcbcbc;
+    animation: ease-in 0.2s fadeIn;
 
     .date {
       width: 20%;
@@ -457,6 +476,8 @@ ons-toolbar {
       border-right: 1px solid #fff;
       background-color: #ffa07a;
       color: #fff;
+      border-bottom-left-radius: 5px;
+      border-top-left-radius: 5px;
 
       p {
         display: flex;
@@ -473,7 +494,6 @@ ons-toolbar {
         height: 100%;
         font-size: 1rem;
         font-weight: bold;
-        border-bottom: 1px solid #fff;
       }
     }
 
@@ -537,8 +557,10 @@ ons-toolbar {
     }
 
     &__money {
+      display: block;
       margin-top: 20px;
       text-align: right;
+      padding-bottom: 2px;
 
       input {
         height: 20px;
@@ -611,6 +633,7 @@ ons-toolbar {
     box-shadow: 1px 1px 3px 1px rgba(0,0,0,0.12);
     border: 1px solid #ffa07a;
     margin: 1vw 1vw;
+    animation: ease-in 0.2s fadeIn;
 
     &.shiver {
       animation: shiver .4s  infinite;
