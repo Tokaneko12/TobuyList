@@ -49,7 +49,8 @@ Module.controller('buyCardController', ['$scope', '$rootScope', function($scope,
       cancelable: true,
       callback: function(inx) {
         if(inx == 1) { // OKを押したときの処理
-          db.collection("cardItems").add(cardItem)
+          cardItem.docId = db.collection("cardItems").doc().id;
+          db.collection("cardItems").doc(cardItem.docId).set(cardItem)
           .then(function(){
             $ctrl.allBuyCard.push(cardItem);
             cardInputDialog.hide();

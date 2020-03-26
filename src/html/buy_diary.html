@@ -7,7 +7,7 @@
     </div>
     <div class="center">
       <span ng-if="$ctrl.totalMonthMoney == 0">日記一覧</span>
-      <span ng-if="$ctrl.totalMonthMoney > 0">合計{{$ctrl.totalMonthMoney}}円</span>
+      <span ng-if="$ctrl.totalMonthMoney > 0">月合計{{$ctrl.totalMonthMoney}}円</span>
     </div>
     <div class="right">
     </div>
@@ -32,9 +32,9 @@
     <p>{{$ctrl.allBuyRecord[0].createAt | date: 'M'}}月</p>
   </ons-bottom-toolbar>
 
-  <ons-dialog var="diaryDialog" class="diary-dialog" cancelable>
+  <ons-dialog var="diaryDialog" class="diary-dialog" ons-postHide="$ctrl.moneyInput = false;" cancelable>
     <div class="record">
-      <div class="record-list" ng-repeat="buyItem in $ctrl.recordItems">
+      <div class="record-list" ng-repeat="buyItem in $ctrl.recordItems.items">
         <p class="record-list__item">
           <span class="record-list__item__name">{{buyItem.name}}</span>
           <span class="record-list__item__number">{{buyItem.number}}</span>
@@ -42,9 +42,10 @@
       </div>
     </div>
     <div class="record__relative">
-      <div class="record__relative__money">
+      <div class="record__relative__money" ng-click="$ctrl.moneyInput = true;">
         <span>計</span>
-        <input type="number" ng-model="$ctrl.recordItems.money">
+        <span ng-if="!$ctrl.moneyInput && $ctrl.recordItems.money > 0">{{$ctrl.recordItems.money}}</span>
+        <input type="number" ng-model="$ctrl.recordItems.money" ng-if="$ctrl.moneyInput || !$ctrl.recordItems.money">
         <span class="unit">円</span>
       </div>
       <!-- <div class="record__relative__memo">
@@ -52,6 +53,6 @@
         <textarea ng-model="buyItem.memo" jp-input></textarea>
       </div> -->
     </div>
-    <ons-button ng-click="$ctrl.registMoney();">金額を登録</ons-button>
+    <ons-button ng-if="$ctrl.moneyInput || !$ctrl.recordItems.money" ng-click="$ctrl.registMoney();">金額を登録</ons-button>
   </ons-dialog>
 </ons-page>

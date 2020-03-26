@@ -9,8 +9,8 @@ Module.controller('buyDiaryController', ['$scope', function($scope) {
     buyItemsRef.where("uid", "==", authUser.uid).get()
     .then(function(querySnapshot) {
       querySnapshot.forEach(function(doc) {
-        // doc.data() is never undefined for query doc snapshots
         $ctrl.allBuyRecord.push(doc.data());
+        if(doc.data().money) $ctrl.totalMonthMoney += doc.data().money;
         $scope.$apply();
       });
     })
@@ -19,17 +19,26 @@ Module.controller('buyDiaryController', ['$scope', function($scope) {
   // 日記詳細画面を開く
   $ctrl.openRecord = function(record) {
     diaryDialog.show();
-    console.log(record);
-    $ctrl.recordItems = record.items;
+    $ctrl.recordItems = record;
   }
 
   // 日記に金額を登録
   $ctrl.registMoney = function() {
-    console.log($ctrl.recordItems.money);
-    ons.notification.alert({
-      title: '',
-      message: '金額の登録が完了しました',
-      cancelable: false,
+    var targetRef = db.collection("buyItems").doc($ctrl.recordItems.docId);
+    targetRef.update({
+      money: $ctrl.recordItems.money
     })
+    .then(function(){
+      ons.notification.alert({
+        title: '',
+        message: '金額の登録が完了しました',
+        cancelable: false,
+        callback: function() {
+          diaryDialog.hide();
+        }
+      })
+    }).catch(function(error) {
+      console.log(error);
+    });
   }
 }]);
