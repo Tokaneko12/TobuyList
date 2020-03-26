@@ -24,11 +24,13 @@ Module.controller('buyDiaryController', ['$scope', function($scope) {
 
   // 日記に金額を登録
   $ctrl.registMoney = function() {
+    loadModal.show();
     var targetRef = db.collection("buyItems").doc($ctrl.recordItems.docId);
     targetRef.update({
       money: $ctrl.recordItems.money
     })
     .then(function(){
+      loadModal.hide();
       ons.notification.alert({
         title: '',
         message: '金額の登録が完了しました',

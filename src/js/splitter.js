@@ -5,8 +5,4 @@ Module.controller('SplitterController', function() {
     $ctrl.dispSafeTop = ons.platform.isIPhoneX() ? true : false;
     $ctrl.dispSafeBtm = true;
   }
-
-  $ctrl.aaa = function() {
-    console.log("aaa");
-  }
 });

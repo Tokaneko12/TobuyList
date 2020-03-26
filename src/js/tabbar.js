@@ -64,11 +64,13 @@ Module.controller('TabbarController', ['$scope', function($scope) {
           cancelable: true,
           callback: function(inx) {
             if(inx == 1) { // OKを押したときの処理
+              loadModal.show();
               buyItem.uid = authUser.uid;
               buyItem.docId = db.collection("cardItems").doc().id;
               db.collection("cardItems").doc(buyItem.docId).set(buyItem)
               .then(function(){
                 $scope.$apply();
+                loadModal.hide();
                 ons.notification.alert({
                   title: '',
                   message: 'カードの追加が完了しました',
@@ -99,12 +101,14 @@ Module.controller('TabbarController', ['$scope', function($scope) {
       cancelable: true,
       callback: function(inx) {
         if(inx == 1) { // OKを押したときの処理
+          loadModal.show();
           buyList.docId = db.collection("buyItems").doc().id;
           db.collection("buyItems").doc(buyList.docId).set(buyList)
           .then(function(){
             $ctrl.buyItems = [];
             localStorage.setItem('buyItems', JSON.stringify($ctrl.buyItems));
             $scope.$apply();
+            loadModal.hide();
           }).catch(function(error) {
             console.log(error);
           });

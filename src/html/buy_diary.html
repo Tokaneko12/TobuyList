@@ -29,7 +29,7 @@
   </div>
 
   <ons-bottom-toolbar class="diary-bottom">
-    <p>{{$ctrl.allBuyRecord[0].createAt | date: 'M'}}月</p>
+    <p ng-if="$ctrl.allBuyRecord.length > 0">{{$ctrl.allBuyRecord[0].createAt | date: 'M'}}月</p>
   </ons-bottom-toolbar>
 
   <ons-dialog var="diaryDialog" class="diary-dialog" ons-postHide="$ctrl.moneyInput = false;" cancelable>

@@ -49,12 +49,14 @@ Module.controller('buyCardController', ['$scope', '$rootScope', function($scope,
       cancelable: true,
       callback: function(inx) {
         if(inx == 1) { // OKを押したときの処理
+          loadModal.show();
           cardItem.docId = db.collection("cardItems").doc().id;
           db.collection("cardItems").doc(cardItem.docId).set(cardItem)
           .then(function(){
             $ctrl.allBuyCard.push(cardItem);
             cardInputDialog.hide();
             $scope.$apply();
+            loadModal.hide();
           }).catch(function(error) {
             console.log(error);
           });
