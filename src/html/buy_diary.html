@@ -53,6 +53,6 @@
         <textarea ng-model="buyItem.memo" jp-input></textarea>
       </div> -->
     </div>
-    <ons-button ng-if="$ctrl.moneyInput || !$ctrl.recordItems.money" ng-click="$ctrl.registMoney();">金額を登録</ons-button>
+    <ons-button ng-if="$ctrl.moneyInput || !$ctrl.recordItems.money" ng-click="$ctrl.registMoney();" ng-disabled="!$ctrl.recordItems.money">金額を登録</ons-button>
   </ons-dialog>
 </ons-page>
