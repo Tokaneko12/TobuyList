@@ -11,4 +11,9 @@ Module.controller('MenuController', function() {
     splitterNav.pushPage('html/buy_card.html');
   }
 
+  // 利用規約を開く
+  $ctrl.openServiceTerms = function() {
+    splitterNav.pushPage('html/service_terms.html');
+  }
+
 });

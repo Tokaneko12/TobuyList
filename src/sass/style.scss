@@ -15,6 +15,10 @@ ons-splitter-side[side="left"][animation="overlay"] {
   border-right: 1px solid rgba(0, 0, 0, 0.1);
 }
 
+.page__content {
+  overflow-y: scroll !important; 
+}
+
 .highlight {
   background-color: lightyellow;
   color: rgba(255, 0, 0, 0.7);
@@ -710,4 +714,40 @@ ons-toolbar {
       border-radius: 50%;
     }
   }
+}
+
+/********************
+ 日記CSS
+********************/
+.terms--wrapper {
+  width: 90vw;
+  margin: 0 5vw;
+
+  ul.numbered-list {
+    padding-left: 1.5em;
+    list-style: none;
+    text-indent: -1.2em;
+  }
+
+  ul.circle-list {
+    padding-left: 1em;
+    list-style: none;
+    text-indent: -1em;
+  }
+
+  .last-modified {
+    font-size: 0.8rem;
+    text-align: right;
+  }
+
+  h2 {
+    font-family: 'Roboto', 'Noto', sans-serif;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin: 0.6em 0;
+  }
+}
+
+.terms__intro {
+  font-size: 0.8rem;
 }

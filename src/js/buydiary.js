@@ -1,9 +1,9 @@
 Module.controller('buyDiaryController', ['$scope', function($scope) {
   var $ctrl = this;
-  $ctrl.totalMonthMoney = 0;
 
   // 日記データ読み込み
   $ctrl.initialize = function() {
+    $ctrl.totalMonthMoney = 0;
     $ctrl.allBuyRecord = [];
     var buyItemsRef = db.collection("buyItems");
     buyItemsRef.where("uid", "==", authUser.uid).get()
@@ -19,7 +19,7 @@ Module.controller('buyDiaryController', ['$scope', function($scope) {
   // 日記詳細画面を開く
   $ctrl.openRecord = function(record) {
     diaryDialog.show();
-    $ctrl.recordItems = record;
+    $ctrl.recordItems = angular.copy(record);
   }
 
   // 日記に金額を登録
@@ -30,6 +30,7 @@ Module.controller('buyDiaryController', ['$scope', function($scope) {
       money: $ctrl.recordItems.money
     })
     .then(function(){
+      $ctrl.initialize();
       loadModal.hide();
       ons.notification.alert({
         title: '',
