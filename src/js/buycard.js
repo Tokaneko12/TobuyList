@@ -88,7 +88,7 @@ Module.controller('buyCardController', ['$scope', '$rootScope', function($scope,
   $ctrl.deleteCard = function(card) {
     ons.notification.confirm({
       title: '',
-      message: 'カードを削除しますか？',
+      message: '「' + card.name + '」' + 'のカードを削除しますか？',
       cancelable: true,
       callback: function(inx) {
         if(inx == 1) { // OKを押したときの処理

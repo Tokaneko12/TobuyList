@@ -109,6 +109,11 @@ Module.controller('TabbarController', ['$scope', function($scope) {
             localStorage.setItem('buyItems', JSON.stringify($ctrl.buyItems));
             $scope.$apply();
             loadModal.hide();
+            ons.notification.alert({
+              title: '',
+              message: '新しい日記が作成されました',
+              cancelable: false,
+            })
           }).catch(function(error) {
             console.log(error);
           });
