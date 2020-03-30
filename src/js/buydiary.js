@@ -1,12 +1,16 @@
-Module.controller('buyDiaryController', ['$scope', function($scope) {
+Module.controller('buyDiaryController', ['$scope', 'Calendar', function($scope, Calendar) {
   var $ctrl = this;
+  $ctrl.nowDate = new Date();
+  $ctrl.calendar = new Calendar();
 
-  // 日記データ読み込み
+  // 手帳データ読み込み
   $ctrl.initialize = function() {
+    var targetMonthTime = $ctrl.calendar.target.getTime();
+    var nextMonthTime = $ctrl.calendar.next.getTime();
     $ctrl.totalMonthMoney = 0;
     $ctrl.allBuyRecord = [];
     var buyItemsRef = db.collection("buyItems");
-    buyItemsRef.where("uid", "==", authUser.uid).get()
+    buyItemsRef.where("uid", "==", authUser.uid).where("createAt", ">=", targetMonthTime).where("createAt", "<", nextMonthTime).get()
     .then(function(querySnapshot) {
       querySnapshot.forEach(function(doc) {
         $ctrl.allBuyRecord.push(doc.data());
@@ -21,14 +25,14 @@ Module.controller('buyDiaryController', ['$scope', function($scope) {
     $ctrl.deleteMode = !$ctrl.deleteMode ? true : false;
   }
 
-  // 買い物日記削除処理
+  // 買い物手帳削除処理
   $ctrl.deleteDiary = function(record) {
     var recordDate = new Date(record.createAt).getDate();
     var recordHours = new Date(record.createAt).getHours();
     var recordMinutes = new Date(record.createAt).getMinutes();
     ons.notification.confirm({
       title: '',
-      message: '「' + recordDate + '日' + recordHours + '時' + recordMinutes + '分' + '」' + 'の日記を削除しますか？',
+      message: '「' + recordDate + '日' + recordHours + '時' + recordMinutes + '分' + '」' + 'の手帳を削除しますか？',
       cancelable: true,
       callback: function(inx) {
         if(inx == 1) { // OKを押したときの処理
@@ -36,6 +40,7 @@ Module.controller('buyDiaryController', ['$scope', function($scope) {
           .then(function() {
             $ctrl.allBuyRecord.splice($ctrl.allBuyRecord.indexOf(record), 1);
             $ctrl.initialize();
+            $scope.$apply();
           }).catch(function(error) {
             console.log(error);
           });
@@ -44,7 +49,7 @@ Module.controller('buyDiaryController', ['$scope', function($scope) {
     });
   }
 
-  // 日記詳細画面を開く
+  // 手帳詳細画面を開く
   $ctrl.openRecord = function(record) {
     if($ctrl.deleteMode) {
       $ctrl.deleteDiary(record);
@@ -54,7 +59,7 @@ Module.controller('buyDiaryController', ['$scope', function($scope) {
     }
   }
 
-  // 日記に金額を登録
+  // 手帳に金額を登録
   $ctrl.registMoney = function() {
     loadModal.show();
     var targetRef = db.collection("buyItems").doc($ctrl.recordItems.docId);
@@ -76,4 +81,12 @@ Module.controller('buyDiaryController', ['$scope', function($scope) {
       console.log(error);
     });
   }
+
+  // 前の月の戻る
+  $ctrl.chgMonth = function(nextFlag){
+    var target = (nextFlag) ? $ctrl.calendar.next : $ctrl.calendar.prev;
+    $ctrl.calendar = new Calendar(target);
+    $ctrl.initialize();
+  };
+
 }]);

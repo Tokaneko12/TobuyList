@@ -1,7 +1,7 @@
 Module.controller('MenuController', function() {
   var $ctrl = this;
 
-  // 日記画面を開く
+  // 手帳画面を開く
   $ctrl.openDialy = function() {
     splitterNav.pushPage('html/buy_diary.html');
   }

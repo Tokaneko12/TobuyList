@@ -111,7 +111,7 @@ Module.controller('TabbarController', ['$scope', function($scope) {
             loadModal.hide();
             ons.notification.alert({
               title: '',
-              message: '新しい日記が作成されました',
+              message: '手帳に項目が追加されました',
               cancelable: false,
             })
           }).catch(function(error) {
@@ -125,7 +125,7 @@ Module.controller('TabbarController', ['$scope', function($scope) {
   $ctrl.openShare = function() {
     var message = '買い物をお願いします。' + '\n';
     for(var i = 0; i < $ctrl.buyItems.length; i++) {
-      var str = $ctrl.buyItems[i].name + ':\t' + $ctrl.buyItems[i].number + '\n';
+      var str = $ctrl.buyItems[i].name + ($ctrl.buyItems[i].number ? ':\t' + $ctrl.buyItems[i].number : '') + '\n';
       message += str;
     }
     if(window.plugins) {

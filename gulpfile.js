@@ -36,7 +36,7 @@ gulp.task("sass", function () {
 });
 
 gulp.task("js", function() {
-  gulp.src(["./src/js/main.js", "./src/directive/*.js", "./src/js/*.js"])              // 対象となるjavaScriptファイルを全部指定
+  gulp.src(["./src/js/main.js", "./src/directive/*.js", "./src/service/*.js", "./src/js/*.js"])              // 対象となるjavaScriptファイルを全部指定
       .pipe(plumber())
       .pipe(concat('app.js'))
       // .pipe(uglify())
