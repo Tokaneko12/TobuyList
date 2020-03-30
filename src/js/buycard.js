@@ -91,7 +91,8 @@ Module.controller('buyCardController', ['$scope', '$rootScope', function($scope,
       message: '「' + card.name + '」' + 'のカードを削除しますか？',
       cancelable: true,
       callback: function(inx) {
-        if(inx == 1) { // OKを押したときの処理
+        if(inx == 1) { // OKを押したときの処理]
+          loadModal.show();
           db.collection("cardItems").doc(card.cId).delete()
           .then(function() {
             if(card.checked) {
@@ -102,6 +103,7 @@ Module.controller('buyCardController', ['$scope', '$rootScope', function($scope,
             $ctrl.allBuyCard.splice($ctrl.allBuyCard.indexOf(card), 1);
             cardInputDialog.hide();
             $scope.$apply();
+            loadModal.hide();
           }).catch(function(error) {
             console.log(error);
           });

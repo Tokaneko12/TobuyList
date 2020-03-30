@@ -469,7 +469,7 @@ ons-toolbar {
 }
 
 /********************
- 日記CSS
+ 手帳CSS
 ********************/
 
 .diary--wraper {
@@ -541,8 +541,27 @@ ons-toolbar {
   display: flex;
   align-items: center;
   justify-content: center;
+
+  .prev-icon {
+    position: absolute;
+    font-size: 1rem;
+    color: #ffa07a;
+    left: 27%;
+    padding: 10px 15px;
+  }
+
+  .next-icon {
+    position: absolute;
+    font-size: 1rem;
+    color: #ffa07a;
+    right: 27%;
+    padding: 10px 15px;
+  }
+
   p {
     margin: 0;
+    font-size: 1rem;
+    font-weight: bold;
   }
 }
 
@@ -765,7 +784,7 @@ ons-toolbar {
 }
 
 /********************
- 日記CSS
+ 手帳CSS
 ********************/
 .terms--wrapper {
   width: 90vw;

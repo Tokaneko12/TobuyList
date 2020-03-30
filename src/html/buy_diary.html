@@ -6,7 +6,7 @@
       </ons-back-button>
     </div>
     <div class="center">
-      <span ng-if="$ctrl.totalMonthMoney == 0">日記一覧</span>
+      <span ng-if="$ctrl.totalMonthMoney == 0">手帳</span>
       <span ng-if="$ctrl.totalMonthMoney > 0">月合計{{$ctrl.totalMonthMoney}}円</span>
     </div>
     <div class="right" ng-click="$ctrl.modeChange();">
@@ -32,10 +32,12 @@
   </div>
 
   <ons-bottom-toolbar class="diary-bottom">
-    <p ng-if="$ctrl.allBuyRecord.length > 0">{{$ctrl.allBuyRecord[0].createAt | date: 'M'}}月</p>
+    <ons-icon ng-click="$ctrl.chgMonth();" class="prev-icon" icon="fa-arrow-left"></ons-icon>
+    <p>{{$ctrl.calendar.target | date: 'y'}}年{{$ctrl.calendar.target | date: 'M'}}月</p>
+    <ons-icon ng-click="$ctrl.chgMonth(true);" class="next-icon" icon="fa-arrow-right" ng-if="$ctrl.nowDate > $ctrl.calendar.next"></ons-icon>
   </ons-bottom-toolbar>
 
-  <ons-dialog var="diaryDialog" class="diary-dialog" ons-postHide="$ctrl.moneyInput = false;" cancelable>
+  <ons-dialog var="diaryDialog" class="diary-dialog" ons-postHide="$ctrl.moneyInput = false;" ons-postShow="$ctrl.closeVisible = true;" ons-preHide="$ctrl.closeVisible = false;" cancelable>
     <div class="dialog">
       <div class="dialog-container">
         <p class="date">{{$ctrl.recordItems.createAt | date: 'd'}}({{$ctrl.recordItems.createAt | date: 'EEE'}}){{$ctrl.recordItems.createAt | date: 'H'}}時{{$ctrl.recordItems.createAt | date: 'm'}}分</p>
@@ -62,6 +64,6 @@
         <ons-button ng-if="$ctrl.moneyInput || !$ctrl.recordItems.money" ng-click="$ctrl.registMoney();" ng-disabled="!$ctrl.recordItems.money">金額を登録</ons-button>
       </div>
     </div>
-    <ons-icon ng-click="diaryDialog.hide();" class="close-icon" icon="fa-times-circle"></ons-icon>
+    <ons-icon ng-click="diaryDialog.hide();" class="close-icon" icon="fa-times-circle" ng-if="$ctrl.closeVisible"></ons-icon>
   </ons-dialog>
 </ons-page>
