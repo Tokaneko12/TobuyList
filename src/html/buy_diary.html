@@ -9,7 +9,9 @@
       <span ng-if="$ctrl.totalMonthMoney == 0">日記一覧</span>
       <span ng-if="$ctrl.totalMonthMoney > 0">月合計{{$ctrl.totalMonthMoney}}円</span>
     </div>
-    <div class="right">
+    <div class="right" ng-click="$ctrl.modeChange();">
+      <span ng-if="!$ctrl.deleteMode">編集</span>
+      <span class="delete" ng-if="$ctrl.deleteMode">終了</span>
     </div>
   </ons-toolbar>
 
@@ -24,6 +26,7 @@
         <div class="time">
           {{buyRecord.createAt | date: 'H'}}時{{buyRecord.createAt | date: 'm'}}分の買い物
         </div>
+        <ons-icon class="minus-icon" icon="fa-minus-circle" ng-if="$ctrl.deleteMode"></ons-icon>
       </div>
     </div>
   </div>
@@ -33,26 +36,32 @@
   </ons-bottom-toolbar>
 
   <ons-dialog var="diaryDialog" class="diary-dialog" ons-postHide="$ctrl.moneyInput = false;" cancelable>
-    <div class="record">
-      <div class="record-list" ng-repeat="buyItem in $ctrl.recordItems.items">
-        <p class="record-list__item">
-          <span class="record-list__item__name">{{buyItem.name}}</span>
-          <span class="record-list__item__number">{{buyItem.number}}</span>
-        </p>
+    <div class="dialog">
+      <div class="dialog-container">
+        <p class="date">{{$ctrl.recordItems.createAt | date: 'd'}}({{$ctrl.recordItems.createAt | date: 'EEE'}}){{$ctrl.recordItems.createAt | date: 'H'}}時{{$ctrl.recordItems.createAt | date: 'm'}}分</p>
+        <div class="record">
+          <div class="record-list" ng-repeat="buyItem in $ctrl.recordItems.items">
+            <p class="record-list__item">
+              <span class="record-list__item__name">{{buyItem.name}}</span>
+              <span class="record-list__item__number">{{buyItem.number}}</span>
+            </p>
+          </div>
+        </div>
+        <div class="record__relative">
+          <div class="record__relative__money" ng-click="$ctrl.moneyInput = true;">
+            <span>計</span>
+            <span ng-if="!$ctrl.moneyInput && $ctrl.recordItems.money > 0">{{$ctrl.recordItems.money}}</span>
+            <input type="number" ng-model="$ctrl.recordItems.money" ng-if="$ctrl.moneyInput || !$ctrl.recordItems.money">
+            <span class="unit">円</span>
+          </div>
+          <!-- <div class="record__relative__memo">
+            <p>メモ</p>
+            <textarea ng-model="buyItem.memo" jp-input></textarea>
+          </div> -->
+        </div>
+        <ons-button ng-if="$ctrl.moneyInput || !$ctrl.recordItems.money" ng-click="$ctrl.registMoney();" ng-disabled="!$ctrl.recordItems.money">金額を登録</ons-button>
       </div>
     </div>
-    <div class="record__relative">
-      <div class="record__relative__money" ng-click="$ctrl.moneyInput = true;">
-        <span>計</span>
-        <span ng-if="!$ctrl.moneyInput && $ctrl.recordItems.money > 0">{{$ctrl.recordItems.money}}</span>
-        <input type="number" ng-model="$ctrl.recordItems.money" ng-if="$ctrl.moneyInput || !$ctrl.recordItems.money">
-        <span class="unit">円</span>
-      </div>
-      <!-- <div class="record__relative__memo">
-        <p>メモ</p>
-        <textarea ng-model="buyItem.memo" jp-input></textarea>
-      </div> -->
-    </div>
-    <ons-button ng-if="$ctrl.moneyInput || !$ctrl.recordItems.money" ng-click="$ctrl.registMoney();" ng-disabled="!$ctrl.recordItems.money">金額を登録</ons-button>
+    <ons-icon ng-click="diaryDialog.hide();" class="close-icon" icon="fa-times-circle"></ons-icon>
   </ons-dialog>
 </ons-page>

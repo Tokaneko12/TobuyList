@@ -16,7 +16,8 @@ ons-splitter-side[side="left"][animation="overlay"] {
 }
 
 .page__content {
-  overflow-y: scroll !important; 
+  overflow-x: hidden;
+  overflow-y: scroll !important;
 }
 
 .highlight {
@@ -477,6 +478,7 @@ ons-toolbar {
 
 .diary {
   &-item {
+    position: relative;
     display: flex;
     align-items: center;
     height: 70px;
@@ -517,6 +519,21 @@ ons-toolbar {
       width: 80%;
       text-align: center;
     }
+
+    .minus-icon {
+      position: absolute;
+      z-index: 1000;
+      padding: 10px;
+      top: -20px;
+      right: -18px;
+      font-size: 1.5rem;
+      color: #ffa07a;
+    }
+
+    .fa-minus-circle:before {
+      background: #fff;
+      border-radius: 50%;
+    }
   }
 }
 
@@ -539,6 +556,12 @@ ons-toolbar {
 
   .dialog-container {
     height: 100%;
+  }
+
+  .date  {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 10px;
   }
 
   .record {
@@ -612,6 +635,31 @@ ons-toolbar {
     text-align: center;
     margin: 0 auto;
     font-weight: bold;
+  }
+
+  .close-icon {
+    position: absolute;
+    z-index: 99999;
+    padding: 3%;
+    top: 6%;
+    right: 0;
+    color: #ffa07a;
+    font-size: 2rem;
+
+    &:after {
+      display: block;
+      content: "";
+      position: absolute;
+      z-index: -1;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      margin: auto;
+      width: 20px;
+      height: 20px;
+      background-color: #fff;
+    }
   }
 }
 
