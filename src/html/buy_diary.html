@@ -53,7 +53,7 @@
           <div class="record__relative__money" ng-click="$ctrl.moneyInput = true;">
             <span>計</span>
             <span ng-if="!$ctrl.moneyInput && $ctrl.recordItems.money > 0">{{$ctrl.recordItems.money}}</span>
-            <input type="number" ng-model="$ctrl.recordItems.money" ng-if="$ctrl.moneyInput || !$ctrl.recordItems.money">
+            <input type="number" ng-model="$ctrl.recordItems.money" ng-if="$ctrl.moneyInput || !$ctrl.recordItems.money" jp-input>
             <span class="unit">円</span>
           </div>
           <!-- <div class="record__relative__memo">
