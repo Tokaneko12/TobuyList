@@ -24,7 +24,7 @@
           </p>
         </div>
         <div class="time">
-          {{buyRecord.createAt | date: 'H'}}時{{buyRecord.createAt | date: 'm'}}分の買い物
+          {{buyRecord.createAt | date: 'H'}}時{{buyRecord.createAt | date: 'm'}}分の買い物<span ng-if="buyRecord.money">【{{buyRecord.money}}円】</span>
         </div>
         <ons-icon class="minus-icon" icon="fa-minus-circle" ng-if="$ctrl.deleteMode"></ons-icon>
       </div>
