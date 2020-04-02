@@ -1,6 +1,8 @@
 Module.controller('MenuController', function() {
   var $ctrl = this;
 
+  if(ons.platform.isIOS()) $ctrl.isIOS = true;
+
   // 手帳画面を開く
   $ctrl.openDialy = function() {
     splitterNav.pushPage('html/buy_diary.html');

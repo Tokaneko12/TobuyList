@@ -1,6 +1,6 @@
 Module.controller('buyCardController', ['$scope', '$rootScope', function($scope, $rootScope) {
   var $ctrl = this;
-  if(ons.platform.isIOS) $ctrl.isIOS = true;
+  if(ons.platform.isIOS()) $ctrl.isIOS = true;
   $ctrl.firstOpen = true;
   $ctrl.buyItems = localStorage.getItem('buyItems') ? JSON.parse(localStorage.getItem('buyItems')) : [];
   $ctrl.buyItemsCopy = localStorage.getItem('buyItems') ? angular.copy(JSON.parse(localStorage.getItem('buyItems'))) : [];

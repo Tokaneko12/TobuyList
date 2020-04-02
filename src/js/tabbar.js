@@ -4,7 +4,7 @@ Module.controller('TabbarController', ['$scope', function($scope) {
   $ctrl.itemName = "";
   $ctrl.modifyMode = false;
 
-  if(ons.platform.isIOS) $ctrl.isIOS = true;
+  if(ons.platform.isIOS()) $ctrl.isIOS = true;
 
   $scope.$on('updateItems', function(){
     $ctrl.buyItems = localStorage.getItem('buyItems') ? JSON.parse(localStorage.getItem('buyItems')) : [];

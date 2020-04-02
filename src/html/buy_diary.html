@@ -9,7 +9,7 @@
       <span ng-if="$ctrl.totalMonthMoney == 0">手帳</span>
       <span ng-if="$ctrl.totalMonthMoney > 0">月合計{{$ctrl.totalMonthMoney}}円</span>
     </div>
-    <div class="right" ng-click="$ctrl.modeChange();">
+    <div class="right" ng-class="{'not-ios': !$ctrl.isIOS}" ng-click="$ctrl.modeChange();">
       <span ng-if="!$ctrl.deleteMode">編集</span>
       <span class="delete" ng-if="$ctrl.deleteMode">終了</span>
     </div>

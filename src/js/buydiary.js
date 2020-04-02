@@ -2,6 +2,7 @@ Module.controller('buyDiaryController', ['$scope', 'Calendar', function($scope, 
   var $ctrl = this;
   $ctrl.nowDate = new Date();
   $ctrl.calendar = new Calendar();
+  if(ons.platform.isIOS()) $ctrl.isIOS = true;
 
   // 手帳データ読み込み
   $ctrl.initialize = function() {

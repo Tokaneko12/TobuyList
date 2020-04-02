@@ -11,6 +11,12 @@ ons-button[modifier=large] {
   margin: 10px;
 }
 
+.button--material:disabled, .button--material[disabled] {
+  opacity: 0.3;
+  background-color: #ffa07a;
+  color: #fff;
+}
+
 ons-splitter-side[side="left"][animation="overlay"] {
   border-right: 1px solid rgba(0, 0, 0, 0.1);
 }
@@ -258,6 +264,10 @@ ons-toolbar {
   .right {
     width: 20%;
     text-align: center;
+
+    &.not-ios {
+      font-size: 1rem;
+    }
 
     span {
       color: #ffa07a;
