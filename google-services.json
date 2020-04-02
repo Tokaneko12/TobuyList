@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "244020507559",
+    "firebase_url": "https://tobuy-86979.firebaseio.com",
+    "project_id": "tobuy-86979",
+    "storage_bucket": "tobuy-86979.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:244020507559:android:03f5b283cab8cd47007c82",
+        "android_client_info": {
+          "package_name": "com.app.buyList"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "244020507559-i3dvh2255hs91sg3lns0ncbi5hm32i8f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_MOPtXTQf8UAMeJLDnd-x53AeLl4tSl4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "244020507559-i3dvh2255hs91sg3lns0ncbi5hm32i8f.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "244020507559-2g5qnujshimu2isqcuar4s2m5j13ik8g.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.app.buyList"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
