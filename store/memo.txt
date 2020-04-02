@@ -1,0 +1,29 @@
+【停止関連】
+(Tolico関連手続き)
+--配信停止
+・お知らせ配信
+・AppStoreConnect配信停止/Apple developer解約
+・Google Play Console配信停止/解約
+↓
+--バックエンドサービス停止
+・Firebaseの有料プラン解約/プロジェクト削除
+・Monaca有料プラン解約
+・さくらインターネットVPS解約
+・Mixpanel解約
+・Trello解約
+(チーム運営関連サービス停止)
+・ロリポップサーバー解約
+・Adobeアカウント解約
+・Slack解約
+
+
+(その他残タスク)
+・ストア画像
+・ストア文言
+・証明書発行
+・リストリセット機能
+・テスト
+・審査提出作業
+https://qiita.com/v97ug/items/2c6c090dea8382ae5fe0
+便利なAPI
+https://qiita.com/mikan3rd/items/ba4737023f08bb2ca161
