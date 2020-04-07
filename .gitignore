@@ -9,5 +9,6 @@ node_modules
 /www/index.html
 /www/js
 /www/html
+/www/img
 /plugins
 /.firebase

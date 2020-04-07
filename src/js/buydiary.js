@@ -13,10 +13,15 @@ Module.controller('buyDiaryController', ['$scope', 'Calendar', function($scope, 
     var buyItemsRef = db.collection("buyItems");
     buyItemsRef.where("uid", "==", authUser.uid).where("createAt", ">=", targetMonthTime).where("createAt", "<", nextMonthTime).get()
     .then(function(querySnapshot) {
+      var cnt = 0;
       querySnapshot.forEach(function(doc) {
+        cnt++;
         $ctrl.allBuyRecord.push(doc.data());
         if(doc.data().money) $ctrl.totalMonthMoney += doc.data().money;
-        $scope.$apply();
+        if(querySnapshot.docs.length == cnt) {
+          $scope.$apply();
+          loadModal.hide();
+        }
       });
     })
   }
@@ -37,6 +42,7 @@ Module.controller('buyDiaryController', ['$scope', 'Calendar', function($scope, 
       cancelable: true,
       callback: function(inx) {
         if(inx == 1) { // OKを押したときの処理
+          loadModal.show();
           db.collection("buyItems").doc(record.docId).delete()
           .then(function() {
             $ctrl.allBuyRecord.splice($ctrl.allBuyRecord.indexOf(record), 1);

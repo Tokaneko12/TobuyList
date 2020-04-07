@@ -35,6 +35,12 @@ gulp.task("sass", function () {
         .pipe(browser.reload({stream: true}));  //ブラウザを更新
 });
 
+//img
+gulp.task('img', function() {
+    gulp.src(['src/img/**/*'], {base: './src/'})
+        .pipe(gulp.dest("www"));
+});
+
 gulp.task("js", function() {
   gulp.src(["./src/js/main.js", "./src/directive/*.js", "./src/service/*.js", "./src/js/*.js"])              // 対象となるjavaScriptファイルを全部指定
       .pipe(plumber())
@@ -45,7 +51,7 @@ gulp.task("js", function() {
 });
 
 //build
-gulp.task("build", ["html", "component", "sass", "js", "server"]);
+gulp.task("build", ["html", "component", "sass", "img", "js", "server"]);
 
 //タスクの一括実行、各ファイルの監視実行
 gulp.task("default", ['build', 'server'], function () {
