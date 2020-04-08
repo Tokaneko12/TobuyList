@@ -14,6 +14,7 @@ Module.controller('buyDiaryController', ['$scope', 'Calendar', function($scope, 
     buyItemsRef.where("uid", "==", authUser.uid).where("createAt", ">=", targetMonthTime).where("createAt", "<", nextMonthTime).get()
     .then(function(querySnapshot) {
       var cnt = 0;
+      if(querySnapshot.docs.length == 0) loadModal.hide();
       querySnapshot.forEach(function(doc) {
         cnt++;
         $ctrl.allBuyRecord.push(doc.data());
