@@ -111,7 +111,7 @@ Module.controller('TabbarController', ['$scope', function($scope) {
             loadModal.hide();
             ons.notification.alert({
               title: '',
-              message: '手帳に項目が追加されました',
+              message: '手帳に履歴が追加されました',
               cancelable: false,
             })
           }).catch(function(error) {
