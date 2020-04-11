@@ -2,6 +2,7 @@ Module.controller('TabbarController', ['$scope', function($scope) {
   var $ctrl = this;
   $ctrl.buyItems = localStorage.getItem('buyItems') ? JSON.parse(localStorage.getItem('buyItems')) : [];
   $ctrl.itemName = "";
+  $ctrl.itemNum = "";
   $ctrl.modifyMode = false;
 
   if(ons.platform.isIOS()) $ctrl.isIOS = true;
@@ -141,7 +142,7 @@ Module.controller('TabbarController', ['$scope', function($scope) {
         if(!result.completed) return;
         ons.notification.confirm({
           title: '',
-          message: '投稿をシェアしました',
+          message: '操作が完了しました',
           buttonLabel: 'OK',
           animation: 'default',
         });

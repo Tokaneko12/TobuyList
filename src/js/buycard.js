@@ -4,6 +4,7 @@ Module.controller('buyCardController', ['$scope', '$rootScope', function($scope,
   $ctrl.firstOpen = true;
   $ctrl.buyItems = localStorage.getItem('buyItems') ? JSON.parse(localStorage.getItem('buyItems')) : [];
   $ctrl.buyItemsCopy = localStorage.getItem('buyItems') ? angular.copy(JSON.parse(localStorage.getItem('buyItems'))) : [];
+  $ctrl.cardNum = '';
 
   // 初期処理
   $ctrl.initialize = function() {
@@ -36,6 +37,7 @@ Module.controller('buyCardController', ['$scope', '$rootScope', function($scope,
 
   // 買い物カード追加処理
   $ctrl.plusCard = function() {
+
     var cardItem = {
       createAt: new Date().getTime(),
       name: $ctrl.cardName,
