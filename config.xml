@@ -72,6 +72,7 @@
     <splash src="/res/android/screen/splash-port-xxhdpi.9.png" density="port-xxhdpi"/>
     <splash src="/res/android/screen/splash-port-xxxhdpi.9.png" density="port-xxxhdpi"/>
     <splash src="/res/android/screen/splash-mdpi.png" density="mdpi"/>
+    <preference name="SplashScreenDelay" value="0"/>
   </platform>
   <platform name="electron">
     <icon src="/res/electron/icon/icon_electron_512.png" width="512" height="512"/>
