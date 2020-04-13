@@ -224,9 +224,17 @@ $toolbarIconColor: #ffa07a;
   }
 }
 
+input::placeholder {
+  opacity: 0.4;
+}
+
+.toolbar--material__center {
+}
+
 .page__content {
   background-color: #ffffff !important;
 }
+
 
 ons-toolbar {
   // background-color: #f !important;
