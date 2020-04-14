@@ -10,6 +10,9 @@
             "cordova-plugin-x-socialsharing": {
                 "PHOTO_LIBRARY_ADD_USAGE_DESCRIPTION": "This app requires photo library access to function properly.",
                 "PHOTO_LIBRARY_USAGE_DESCRIPTION": "This app requires photo library access to function properly."
+            },
+            "cordova-plugin-admob-free": {
+                "ADMOB_APP_ID": "ca-app-pub-5803555246942792~1409716913"
             }
         },
         "platforms": [
@@ -18,14 +21,14 @@
         ]
     },
     "dependencies": {
-        "cordova-android": "^8.1.0",
         "cordova-admob-sdk": "^0.24.1",
+        "cordova-android": "^8.1.0",
         "cordova-custom-config": "5.1.0",
         "cordova-ios": "^5.1.1",
-        "cordova-plugin-admob-free": "0.27.0",
         "cordova-plugin-splashscreen": "5.0.2",
         "cordova-plugin-whitelist": "1.3.3",
         "cordova-plugin-x-socialsharing": "file:res/custom_plugins/cordova-plugin-x-socialsharing",
+        "cordova-promise-polyfill": "0.0.2",
         "es6-promise-plugin": "^4.2.2",
         "firebase": "^7.5.0",
         "gulp-autoprefixer": "^7.0.1",
@@ -33,7 +36,8 @@
         "gulp-plumber": "^1.2.1",
         "gulp-sass": "^4.0.2",
         "gulp-uglify": "^3.0.2",
-        "onsenui": "^2.10.10"
+        "onsenui": "^2.10.10",
+        "properties-parser": "^0.3.1"
     },
     "scripts": {
         "monaca:preview": "npm run dev",
