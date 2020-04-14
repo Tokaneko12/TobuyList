@@ -31,9 +31,12 @@ Module.controller('TabbarController', ['$scope', function($scope) {
     });
 
     // Create banner
-    admob.banner.prepare()
-    // Show the banner
-    admob.banner.show();
+    admob.banner.prepare().then(function() {
+      // Show the banner
+      admob.banner.show();
+    }).catch(function(err){
+      console.log(err);
+    })
   }
 
   $scope.$on('updateItems', function(){
