@@ -14,11 +14,12 @@ Module.controller('buyCardController', ['$scope', '$rootScope', function($scope,
     .then(function(querySnapshot) {
       querySnapshot.forEach(function(doc) {
         var cardData = doc.data();
-        cardData.cId = doc.id;
+        cardData.docId = doc.id;
         cardData.checked = $ctrl.buyItems.some(function(item){
-          if(item.cId == cardData.cId) return true;
+          if(item.docId == cardData.docId) return true;
         });
         $ctrl.allBuyCard.push(cardData);
+        console.log($ctrl.allBuyCard);
         $scope.$apply();
       });
     })
@@ -42,7 +43,7 @@ Module.controller('buyCardController', ['$scope', '$rootScope', function($scope,
       createAt: new Date().getTime(),
       name: $ctrl.cardName,
       number: $ctrl.cardNum,
-      uid: authUser.uid
+      uid: authUser.uid,
     };
 
     ons.notification.confirm({
@@ -74,14 +75,14 @@ Module.controller('buyCardController', ['$scope', '$rootScope', function($scope,
         name: card.name,
         check: false,
         number: card.number,
-        cId: card.cId,
+        docId: card.docId,
       };
 
       $ctrl.buyItems.push(buyObj);
       card.checked = true;
     } else { // カードからチェックを外すとき
       $ctrl.buyItems = $ctrl.buyItems.filter(function(item){
-        return item.cId != card.cId;
+        return item.docId != card.docId;
       });
     }
   }
@@ -95,11 +96,11 @@ Module.controller('buyCardController', ['$scope', '$rootScope', function($scope,
       callback: function(inx) {
         if(inx == 1) { // OKを押したときの処理]
           loadModal.show();
-          db.collection("cardItems").doc(card.cId).delete()
+          db.collection("cardItems").doc(card.docId).delete()
           .then(function() {
             if(card.checked) {
               $ctrl.buyItems = $ctrl.buyItems.filter(function(item){
-                return item.cId != card.cId;
+                return item.docId != card.docId;
               });
             }
             $ctrl.allBuyCard.splice($ctrl.allBuyCard.indexOf(card), 1);
