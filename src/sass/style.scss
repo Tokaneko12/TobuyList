@@ -326,10 +326,14 @@ ons-toolbar {
           margin-right: 12px;
         }
 
+        &__text {
+          font-size: 1.2rem;
+        }
+
         &__number {
           position: absolute;
           right: 12vw;
-          font-size: 0.8rem;
+          font-size: 1.15rem;
           opacity: 0.8;
         }
 
@@ -341,7 +345,7 @@ ons-toolbar {
           justify-content: center;
           width: 12vw;
           height: 100%;
-          font-size: 1.6rem;
+          font-size: 1.8rem;
           color: #bdbdbd;
         }
 
@@ -617,6 +621,7 @@ ons-toolbar {
       padding-bottom: 2px;
 
       &__name {
+        font-size: 1.1rem;
       }
 
       &__number {
@@ -638,11 +643,12 @@ ons-toolbar {
       margin-top: 20px;
       text-align: right;
       padding-bottom: 2px;
+      font-size: 1.2rem;
 
       input {
         height: 20px;
         padding: 5px;
-        font-size: 0.9rem;
+        font-size: 1rem;
       }
 
       .unit {
@@ -755,16 +761,18 @@ ons-toolbar {
       }
 
       .plus-text {
-        margin: 10px 0 0;
+        font-size: 0.95rem;
+        margin: 8px 0 0;
       }
 
       p {
-        margin: 0;
-        font-size: 0.9rem;
+        margin: 0 0 2px;
+        padding: 0 5px;
+        font-size: 1rem;
       }
 
       span {
-        font-size: 0.8rem;
+        font-size: 0.95rem;
       }
     }
 

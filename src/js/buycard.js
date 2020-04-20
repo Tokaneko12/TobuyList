@@ -19,7 +19,6 @@ Module.controller('buyCardController', ['$scope', '$rootScope', function($scope,
           if(item.docId == cardData.docId) return true;
         });
         $ctrl.allBuyCard.push(cardData);
-        console.log($ctrl.allBuyCard);
         $scope.$apply();
       });
     })

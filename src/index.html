@@ -64,7 +64,7 @@
           <ons-list class="buy-list">
             <ons-list-item class="buy-list__item" ng-repeat="buyItem in $ctrl.buyItems track by $index" ng-click="buyItem.check = !buyItem.check;$event.stopPropagation();">
               <ons-checkbox class="buy-list__item__check" ng-model="buyItem.check"></ons-checkbox>
-              <span ng-class="{'line-through': buyItem.check, 'tenlength-over': buyItem.name.length > 10}">{{buyItem.name}}</span>
+              <span class="buy-list__item__text" ng-class="{'line-through': buyItem.check, 'tenlength-over': buyItem.name.length > 10}">{{buyItem.name}}</span>
               <span class="buy-list__item__number">{{buyItem.number}}</span>
               <ons-icon class="more-icon" icon="md-more-vert" ng-click="$ctrl.openItemMenu(buyItem, $index);$event.stopPropagation();"></ons-icon>
             </ons-list-item>
