@@ -81,6 +81,12 @@
     <preference name="SplashScreenHeight" value="300"/>
     <preference name="ShowSplashScreen" value="false"/>
   </platform>
+  <edit-config file="*-Info.plist" mode="merge" target="UIUserInterfaceStyle">
+    <string>Light</string>
+  </edit-config>
+  <edit-config file="*-Info.plist" mode="merge" target="UIViewControllerBasedStatusBarAppearance">
+      <true/>
+  </edit-config>
   <preference name="WindowsStorePublisherName" value="My Name"/>
   <preference name="WindowsStoreIdentityName" value="d604f88b-7386-1e81-8bfe-748ca06585ca"/>
   <preference name="ios-XCBuildConfiguration-TARGETED_DEVICE_FAMILY" value="1,2"/>
