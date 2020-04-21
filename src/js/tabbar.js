@@ -7,6 +7,38 @@ Module.controller('TabbarController', ['$scope', function($scope) {
 
   if(ons.platform.isIOS()) $ctrl.isIOS = true;
 
+  if(ons.platform.isWebView() && admob) {
+    var admobid = {};
+    if(ons.platform.isAndroid()) {
+      admobid = { // for Android
+        // banner: 'ca-app-pub-3940256099942544/6300978111',
+        banner: 'ca-app-pub-5803555246942792/5241150710',
+      };
+    } else if(ons.platform.isIOS()) {
+      admobid = { // for iOS
+        banner: 'ca-app-pub-3940256099942544/6300978111',
+        // banner: 'ca-app-pub-7304513606925993/2616477093',
+      };
+    } else {
+      admobid = { // for Windows Phone
+        // banner: 'ca-app-pub-6869992474017983/8878394753',
+      };
+    }
+
+    admob.banner.config({
+      id: admobid.banner,
+      isTesting: true,
+    });
+
+    // Create banner
+    admob.banner.prepare().then(function() {
+      // Show the banner
+      admob.banner.show();
+    }).catch(function(err){
+      console.log(err);
+    })
+  }
+
   $scope.$on('updateItems', function(){
     $ctrl.buyItems = localStorage.getItem('buyItems') ? JSON.parse(localStorage.getItem('buyItems')) : [];
   });
