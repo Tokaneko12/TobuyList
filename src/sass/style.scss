@@ -328,11 +328,14 @@ ons-toolbar {
 
         &__text {
           font-size: 1.2rem;
+          width: 60vw;
         }
 
         &__number {
           position: absolute;
+          width: 15vw;
           right: 12vw;
+          text-align: right;
           font-size: 1.15rem;
           opacity: 0.8;
         }
@@ -354,7 +357,7 @@ ons-toolbar {
         }
 
         .tenlength-over {
-          font-size: 0.7rem;
+          font-size: 0.9rem;
         }
       }
     }
@@ -706,7 +709,9 @@ ons-toolbar {
   }
 }
 
-
+.action-sheet-title {
+  font-size: 1rem;
+}
 
 /********************
  買い物カードCSS
