@@ -4,8 +4,13 @@ Module.controller('TabbarController', ['$scope', function($scope) {
   $ctrl.itemName = "";
   $ctrl.itemNum = "";
   $ctrl.modifyMode = false;
+  $ctrl.disaCheckItem = localStorage.getItem('disaCheckAllow') == '許可しない' ? false : true;
 
   if(ons.platform.isIOS()) $ctrl.isIOS = true;
+
+  $scope.$on('updateSetting', function(){
+    $ctrl.disaCheckItem = localStorage.getItem('disaCheckAllow') == '許可しない' ? false : true;
+  });
 
   $scope.$on('updateItems', function(){
     $ctrl.buyItems = localStorage.getItem('buyItems') ? JSON.parse(localStorage.getItem('buyItems')) : [];
@@ -90,9 +95,25 @@ Module.controller('TabbarController', ['$scope', function($scope) {
 
   // 買い物完了
   $ctrl.compBuy = function() {
+    var listItems = $ctrl.buyItems;
+
+    if(!$ctrl.disaCheckItem) {
+      listItems = $ctrl.buyItems.filter(function(item) {
+        return item.check == true;
+      });
+      if(listItems.length < 1) {
+        ons.notification.alert({
+          title: '',
+          message: '項目をチェックしてください。',
+          cancelable: false,
+        });
+        return;
+      }
+    }
+
     var buyList = {
       createAt: new Date().getTime(),
-      items: $ctrl.buyItems,
+      items: listItems,
       uid: authUser.uid
     }
 
