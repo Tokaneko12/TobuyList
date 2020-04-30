@@ -2,6 +2,8 @@
  *** Custom CSS ***
  *****************/
 
+$commonColor: #ffa07a;
+
 ons-input[type=text] {
   width: 90%;
 }
@@ -13,7 +15,7 @@ ons-button[modifier=large] {
 
 .button--material:disabled, .button--material[disabled] {
   opacity: 0.3;
-  background-color: #ffa07a;
+  background-color: $commonColor;
   color: #fff;
 }
 
@@ -209,18 +211,16 @@ ons-splitter-side[side="left"][animation="overlay"] {
  共通CSS
 ********************/
 
-$toolbarIconColor: #ffa07a;
-
 :checked + .checkbox__checkmark:before {
-  background: #ffa07a;
+  background: $commonColor;
   border: none;
 }
 
 .button {
-  background-color: #ffa07a;
+  background-color: $commonColor;
 
   &:active {
-    background-color: #ffa07a
+    background-color: $commonColor;
   }
 }
 
@@ -278,13 +278,13 @@ ons-toolbar {
     }
 
     span {
-      color: #ffa07a;
+      color: $commonColor;
       font-weight: bold;
     }
 
     ons-icon {
       font-size: 1.8rem;
-      color: #ffa07a;
+      color: $commonColor;
     }
 
     .delete {
@@ -381,7 +381,16 @@ ons-toolbar {
 }
 
 .back-button__icon {
-  fill: #ffa07a;
+  fill: $commonColor;
+}
+
+.alert-dialog-content {
+  font-size: 0.9rem;
+}
+
+.alert-dialog-content small {
+  display: block;
+  font-size: 0.65rem;
 }
 
 /********************
@@ -444,7 +453,7 @@ ons-toolbar {
   background-color: rgba(0, 0, 0, 0.1);
 
   i {
-    color: #ffa07a;
+    color: $commonColor;
   }
 }
 
@@ -487,7 +496,7 @@ ons-toolbar {
   }
 
   .list-item--chevron:before {
-    border-color: #ffa07a;
+    border-color: $commonColor;
     width: 8px;
     height: 8px;
   }
@@ -517,7 +526,7 @@ ons-toolbar {
       height: 100%;
       text-align: center;
       border-right: 1px solid #fff;
-      background-color: #ffa07a;
+      background-color: $commonColor;
       color: #fff;
       border-bottom-left-radius: 5px;
       border-top-left-radius: 5px;
@@ -552,7 +561,7 @@ ons-toolbar {
       top: -20px;
       right: -18px;
       font-size: 1.5rem;
-      color: #ffa07a;
+      color: $commonColor;
     }
 
     .fa-minus-circle:before {
@@ -570,7 +579,7 @@ ons-toolbar {
   .prev-icon {
     position: absolute;
     font-size: 1rem;
-    color: #ffa07a;
+    color: $commonColor;
     left: 27%;
     padding: 10px 15px;
   }
@@ -578,7 +587,7 @@ ons-toolbar {
   .next-icon {
     position: absolute;
     font-size: 1rem;
-    color: #ffa07a;
+    color: $commonColor;
     right: 27%;
     padding: 10px 15px;
   }
@@ -689,7 +698,7 @@ ons-toolbar {
     padding: 3%;
     top: 6%;
     right: 0;
-    color: #ffa07a;
+    color: $commonColor;
     font-size: 2rem;
 
     &:after {
@@ -711,6 +720,20 @@ ons-toolbar {
 
 .action-sheet-title {
   font-size: 1rem;
+}
+
+.noitem-message {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.noitem-message p {
+  color: #ccc;
+  text-align: center;
+  margin: 0 0 20% 0;
+  font-size: 1.05rem;
 }
 
 /********************
@@ -742,9 +765,9 @@ ons-toolbar {
     margin: 0;
     font-size: 0.85rem;
     font-weight: bold;
-    color: #ffa07a;
+    color: $commonColor;
     box-shadow: 1px 1px 3px 1px rgba(0,0,0,0.12);
-    border: 1px solid #ffa07a;
+    border: 1px solid $commonColor;
     margin: 1vw 1vw;
     animation: ease-in 0.2s fadeIn;
 
@@ -848,4 +871,14 @@ ons-toolbar {
 
 .terms__intro {
   font-size: 0.8rem;
+}
+
+/********************
+ 設定CSS
+********************/
+#settingPage {
+  :checked + .switch__toggle {
+    box-shadow: inset 0 0 0 2px $commonColor;
+    background-color: $commonColor;
+  }
 }

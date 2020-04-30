@@ -1,0 +1,25 @@
+<ons-page id="settingPage" ng-controller="settingController as $ctrl" ng-init="$ctrl.initialize();">
+
+  <ons-toolbar>
+    <div class="left">
+      <ons-back-button ng-click="$ctrl.backPage();"></ons-back-button>
+    </div>
+    <div class="center">設定</div>
+    <div class="right" ng-class="{'not-ios': !$ctrl.isIOS}">
+    </div>
+  </ons-toolbar>
+
+  <div class="">
+
+    <ons-list>
+      <ons-list-header>各種設定</ons-list-header>
+      <ons-list-item>
+        <div class="center">チェック項目のみ<br/>手帳に追加</div>
+        <div class="right">
+          <ons-switch ng-model="$ctrl.disaCheckItem"
+                    ng-change="$ctrl.updCheck($ctrl.disaCheckItem)"></ons-switch>
+        </div>
+      </ons-list-item>
+    </ons-list>
+  </div>
+</ons-page>

@@ -13,6 +13,11 @@ Module.controller('MenuController', function() {
     splitterNav.pushPage('html/buy_card.html');
   }
 
+  // 設定画面を開く
+  $ctrl.openSetting = function() {
+    splitterNav.pushPage('html/setting.html');
+  }
+
   // 利用規約を開く
   $ctrl.openServiceTerms = function() {
     splitterNav.pushPage('html/service_terms.html');
