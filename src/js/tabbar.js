@@ -4,12 +4,12 @@ Module.controller('TabbarController', ['$scope', function($scope) {
   $ctrl.itemName = "";
   $ctrl.itemNum = "";
   $ctrl.modifyMode = false;
-  $ctrl.disaCheckItem = localStorage.getItem('disaCheckAllow') == '許可しない' ? false : true;
+  $ctrl.disaCheckItem = localStorage.getItem('disaCheckAllow') == 'チェック項目のみ追加' ? true : false;
 
   if(ons.platform.isIOS()) $ctrl.isIOS = true;
 
   $scope.$on('updateSetting', function(){
-    $ctrl.disaCheckItem = localStorage.getItem('disaCheckAllow') == '許可しない' ? false : true;
+    $ctrl.disaCheckItem = localStorage.getItem('disaCheckAllow') == 'チェック項目のみ追加' ? true : false;
   });
 
   $scope.$on('updateItems', function(){
@@ -95,10 +95,13 @@ Module.controller('TabbarController', ['$scope', function($scope) {
 
   // 買い物完了
   $ctrl.compBuy = function() {
+    var remainItems = [];
     var listItems = $ctrl.buyItems;
+    var plusMessage = '';
 
-    if(!$ctrl.disaCheckItem) {
+    if($ctrl.disaCheckItem) {
       listItems = $ctrl.buyItems.filter(function(item) {
+        if(!item.check) remainItems.push(item);
         return item.check == true;
       });
       if(listItems.length < 1) {
@@ -127,7 +130,7 @@ Module.controller('TabbarController', ['$scope', function($scope) {
           buyList.docId = db.collection("buyItems").doc().id;
           db.collection("buyItems").doc(buyList.docId).set(buyList)
           .then(function(){
-            $ctrl.buyItems = [];
+            $ctrl.buyItems = remainItems;
             localStorage.setItem('buyItems', JSON.stringify($ctrl.buyItems));
             $scope.$apply();
             loadModal.hide();

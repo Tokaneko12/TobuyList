@@ -384,6 +384,15 @@ ons-toolbar {
   fill: $commonColor;
 }
 
+.alert-dialog-content {
+  font-size: 0.9rem;
+}
+
+.alert-dialog-content small {
+  display: block;
+  font-size: 0.65rem;
+}
+
 /********************
  項目入力ダイアログCSS
 ********************/
@@ -711,6 +720,20 @@ ons-toolbar {
 
 .action-sheet-title {
   font-size: 1rem;
+}
+
+.noitem-message {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.noitem-message p {
+  color: #ccc;
+  text-align: center;
+  margin: 0 0 20% 0;
+  font-size: 1.05rem;
 }
 
 /********************

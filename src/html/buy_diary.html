@@ -15,7 +15,7 @@
     </div>
   </ons-toolbar>
 
-  <div class="diary--wraper">
+  <div class="diary--wraper" ng-if="$ctrl.allBuyRecord.length > 0">
     <div class="diary">
       <div class="diary-item" ng-repeat="buyRecord in $ctrl.allBuyRecord | orderBy: '-createAt'" ng-click="$ctrl.openRecord(buyRecord);">
         <div class="date">
@@ -29,6 +29,10 @@
         <ons-icon class="minus-icon" icon="fa-minus-circle" ng-if="$ctrl.deleteMode"></ons-icon>
       </div>
     </div>
+  </div>
+
+  <div class="noitem-message" ng-if="$ctrl.allBuyRecord.length < 1">
+    <p>買い物完了で<br/>購入履歴が追加されます。</p>
   </div>
 
   <ons-bottom-toolbar class="diary-bottom">

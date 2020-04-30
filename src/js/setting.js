@@ -1,6 +1,6 @@
 Module.controller('settingController', ['$scope', '$rootScope', function($scope, $rootScope) {
   var $ctrl = this;
-  $ctrl.disaCheckItem = localStorage.getItem('disaCheckAllow') == '許可しない' ? false : true;
+  $ctrl.disaCheckItem = localStorage.getItem('disaCheckAllow') == 'チェック項目のみ追加' ? true : false;
 
   if(ons.platform.isIOS()) $ctrl.isIOS = true;
 
@@ -9,7 +9,7 @@ Module.controller('settingController', ['$scope', '$rootScope', function($scope,
   }
 
   $ctrl.updCheck = function() {
-    var permWord = $ctrl.disaCheckItem ? '許可' : '許可しない';
+    var permWord = $ctrl.disaCheckItem ? 'チェック項目のみ追加' : '通常設定';
     localStorage.setItem('disaCheckAllow', permWord);
     $rootScope.$broadcast('updateSetting');
     ons.notification.alert({
