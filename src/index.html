@@ -51,7 +51,13 @@
             <!-- <img src="img/comment-regular.svg" alt=""> -->
           </ons-toolbar-button>
         </div>
-        <div class="center">買うもの</div>
+        <div class="center" ng-click~"$ctrl.openPullDown();">
+          <ons-select ng-model="$ctrl.selectedModifier" ng-change="$ctrl.editSelects();">
+            <option value="buyList">買うもの</option>
+            <option value="{{note.name}}" ng-repeat="note in $ctrl.notes track by $index">{{note.name}}</option>
+            <option value="addMemo">メモを追加</option>
+          </ons-select>
+        </div>
         <div class="right">
           <ons-toolbar-button ng-click="Splitter.right.open()">
             <ons-icon icon="md-menu"></ons-icon>
@@ -59,10 +65,10 @@
         </div>
       </ons-toolbar>
 
-      <div class="main--wrapper">
-        <div class="buy-list--wrapper" ng-class="{'tap-recommend': $ctrl.buyItems.length < 1}" ng-click="itemInputDialog.show();">
+      <div class="main--wrapper" ng-repeat="note in $ctrl.notes track by $index">
+        <div class="buy-list--wrapper" ng-class="{'tap-recommend': note.buyItems.length < 1}" ng-click="itemInputDialog.show();">
           <ons-list class="buy-list">
-            <ons-list-item class="buy-list__item" ng-repeat="buyItem in $ctrl.buyItems track by $index" ng-click="buyItem.check = !buyItem.check;$event.stopPropagation();">
+            <ons-list-item class="buy-list__item" ng-repeat="buyItem in note.buyItems track by $index" ng-click="buyItem.check = !buyItem.check;$event.stopPropagation();">
               <ons-checkbox class="buy-list__item__check" ng-model="buyItem.check"></ons-checkbox>
               <span class="buy-list__item__text" ng-class="{'line-through': buyItem.check, 'tenlength-over': buyItem.name.length > 10}">{{buyItem.name}}</span>
               <span class="buy-list__item__number">{{buyItem.number}}</span>
@@ -71,7 +77,7 @@
           </ons-list>
         </div>
         <div class="button--wrapper">
-          <ons-button class="comp-button" ng-click="$ctrl.compBuy();" ng-disabled="($ctrl.buyItems.length < 1)">買い物完了</ons-button>
+          <ons-button class="comp-button" ng-click="$ctrl.compBuy();" ng-disabled="($ctrl.notes.buyItems.length < 1)">買い物完了</ons-button>
         </div>
       </div>
 
@@ -86,6 +92,17 @@
           <ons-button class="item-add__button" ng-click="$ctrl.addItem();">
             <span ng-if="$ctrl.modifyMode">変更</span>
             <span ng-if="!$ctrl.modifyMode">追加</span>
+          </ons-butoon>
+        </div>
+      </ons-dialog>
+
+      <ons-dialog class="item-input__dialog" var="noteInputDialog" ons-postHide="$ctrl.resetVal();" cancelable>
+        <div class="item-text--wrapper" onclick="this.querySelector('input').focus()">
+          <input class="item-text__input" ng-class="{'ios-input': $ctrl.isIOS}" type="text" placeholder="メモ名" name="メモ名" ng-model="$ctrl.memoName" jp-input>
+        </div>
+        <div class="item-add--wrapper">
+          <ons-button class="item-add__button" ng-click="$ctrl.addMemo();">
+            作成
           </ons-butoon>
         </div>
       </ons-dialog>
