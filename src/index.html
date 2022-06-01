@@ -51,11 +51,12 @@
             <!-- <img src="img/comment-regular.svg" alt=""> -->
           </ons-toolbar-button>
         </div>
-        <div class="center" ng-click~"$ctrl.openPullDown();">
+        <div class="center" ng-click="$ctrl.openPullDown();">
           <ons-select ng-model="$ctrl.selectedModifier" ng-change="$ctrl.editSelects();">
             <option value="buyList">買うもの</option>
             <option value="{{note.name}}" ng-repeat="note in $ctrl.notes track by $index">{{note.name}}</option>
             <option value="addMemo">メモを追加</option>
+            <option value="deleteMemo" style="{color: red}">メモを削除</option>
           </ons-select>
         </div>
         <div class="right">
@@ -65,10 +66,10 @@
         </div>
       </ons-toolbar>
 
-      <div class="main--wrapper" ng-repeat="note in $ctrl.notes track by $index">
-        <div class="buy-list--wrapper" ng-class="{'tap-recommend': note.buyItems.length < 1}" ng-click="itemInputDialog.show();">
+      <div class="main--wrapper">
+        <div class="buy-list--wrapper" ng-class="{'tap-recommend': $ctrl.buyItems.length < 1}" ng-click="itemInputDialog.show();">
           <ons-list class="buy-list">
-            <ons-list-item class="buy-list__item" ng-repeat="buyItem in note.buyItems track by $index" ng-click="buyItem.check = !buyItem.check;$event.stopPropagation();">
+            <ons-list-item class="buy-list__item" ng-repeat="buyItem in $ctrl.buyItems track by $index" ng-click="buyItem.check = !buyItem.check;$event.stopPropagation();">
               <ons-checkbox class="buy-list__item__check" ng-model="buyItem.check"></ons-checkbox>
               <span class="buy-list__item__text" ng-class="{'line-through': buyItem.check, 'tenlength-over': buyItem.name.length > 10}">{{buyItem.name}}</span>
               <span class="buy-list__item__number">{{buyItem.number}}</span>

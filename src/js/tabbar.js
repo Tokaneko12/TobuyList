@@ -1,10 +1,12 @@
 Module.controller('TabbarController', ['$scope', function($scope) {
   var $ctrl = this;
+  $ctrl.selectedModifier = "buyList";
+  var noteName = $ctrl.selectedModifier;
   $ctrl.notes = localStorage.getItem('notes') ? JSON.parse(localStorage.getItem('notes')) : [];
+  $ctrl.buyItems = localStorage.getItem($ctrl.selectedModifier) ? JSON.parse(localStorage.getItem($ctrl.selectedModifier)) : [];
   $ctrl.itemNum = "";
   $ctrl.noteName = "";
   $ctrl.modifyMode = false;
-  $ctrl.selectedModifier = "buyList";
   $ctrl.disaCheckItem = localStorage.getItem('disaCheckAllow') == 'チェック項目のみ追加' ? true : false;
 
   if(ons.platform.isIOS()) $ctrl.isIOS = true;
@@ -15,23 +17,23 @@ Module.controller('TabbarController', ['$scope', function($scope) {
 
   $scope.$on('updateItems', function(){
     $ctrl.notes = localStorage.getItem('notes') ? JSON.parse(localStorage.getItem('notes')) : [];
-
+    $ctrl.buyItems = localStorage.getItem($ctrl.selectedModifier) ? JSON.parse(localStorage.getItem($ctrl.selectedModifier)) : [];
   });
 
   // 買いものアイテムの追加
   $ctrl.addItem = function() {
-    console.log($ctrl.notes);
     var buyObj = {
       name: $ctrl.itemName,
       check: false,
       number: $ctrl.itemNum,
     };
     if($ctrl.modifyIdx >= 0) {
-      $ctrl.notes.buyItems.splice($ctrl.modifyIdx, 1, buyObj);
+      $ctrl.buyItems.splice($ctrl.modifyIdx, 1, buyObj);
     } else if($ctrl.itemName.length > 0) {
-      $ctrl.notes.buyItems.push(buyObj);
+      $ctrl.buyItems.push(buyObj);
     }
     localStorage.setItem('notes', JSON.stringify($ctrl.notes));
+    localStorage.setItem($ctrl.selectedModifier, JSON.stringify($ctrl.buyItems));
     itemInputDialog.hide();
   }
 
@@ -62,8 +64,8 @@ Module.controller('TabbarController', ['$scope', function($scope) {
         itemInputDialog.show();
       }
       if(index == 1) {
-        $ctrl.notes.buyItems.splice(buyIdx, 1);
-        localStorage.setItem('buyItems', JSON.stringify($ctrl.notes.buyItems));
+        $ctrl.buyItems.splice(buyIdx, 1);
+        localStorage.setItem($ctrl.selectedModifier, JSON.stringify($ctrl.buyItems));
         $scope.$apply();
       }
       if(index == 2) {
@@ -99,11 +101,11 @@ Module.controller('TabbarController', ['$scope', function($scope) {
   // 買い物完了
   $ctrl.compBuy = function() {
     var remainItems = [];
-    var listItems = $ctrl.notes.buyItems;
+    var listItems = $ctrl.buyItems;
     var plusMessage = '';
 
     if($ctrl.disaCheckItem) {
-      listItems = $ctrl.notes.buyItems.filter(function(item) {
+      listItems = $ctrl.buyItems.filter(function(item) {
         if(!item.check) remainItems.push(item);
         return item.check == true;
       });
@@ -133,8 +135,8 @@ Module.controller('TabbarController', ['$scope', function($scope) {
           buyList.docId = db.collection("buyItems").doc().id;
           db.collection("buyItems").doc(buyList.docId).set(buyList)
           .then(function(){
-            $ctrl.notes.buyItems = remainItems;
-            localStorage.setItem('buyItems', JSON.stringify($ctrl.notes));
+            $ctrl.buyItems = remainItems;
+            localStorage.setItem($ctrl.selectedModifier, []);
             $scope.$apply();
             loadModal.hide();
             ons.notification.alert({
@@ -152,8 +154,8 @@ Module.controller('TabbarController', ['$scope', function($scope) {
 
   $ctrl.openShare = function() {
     var message = '買い物をお願いします。' + '\n';
-    for(var i = 0; i < $ctrl.notes.buyItems.length; i++) {
-      var str = $ctrl.notes.buyItems[i].name + ($ctrl.notes.buyItems[i].number ? ':\t' + $ctrl.notes.buyItems[i].number : '') + '\n';
+    for(var i = 0; i < $ctrl.buyItems.length; i++) {
+      var str = $ctrl.buyItems[i].name + ($ctrl.buyItems[i].number ? ':\t' + $ctrl.buyItems[i].number : '') + '\n';
       message += str;
     }
     if(window.plugins) {
@@ -197,6 +199,36 @@ Module.controller('TabbarController', ['$scope', function($scope) {
     if($ctrl.selectedModifier == 'addMemo') {
       noteInputDialog.show();
     }
+    if($ctrl.selectedModifier == 'deleteMemo') {
+      ons.notification.confirm({
+        title: '',
+        message: '現在のメモを削除してもよろしいですか？',
+        cancelable: true,
+        callback: function(inx) {
+          if(inx == 1) { // OKを押したときの処理
+            loadModal.show();
+            for(var i = 0; i < $ctrl.notes.length; i++) {
+              if($ctrl.notes[i].name = noteName) {
+                $ctrl.notes.splice(i,1);
+              }
+            }
+            localStorage.setItem('notes', JSON.stringify($ctrl.notes));
+            $ctrl.selectedModifier = 'buyList';
+            $ctrl.buyItems = localStorage.getItem($ctrl.selectedModifier) ? JSON.parse(localStorage.getItem($ctrl.selectedModifier)) : [];
+            $scope.$apply();
+            loadModal.hide();
+            ons.notification.alert({
+              title: '',
+              message: '削除が完了しました。',
+              cancelable: false,
+            })
+          }
+        }
+      });
+    }
+    noteName = $ctrl.selectedModifier;
+    $ctrl.buyItems = localStorage.getItem($ctrl.selectedModifier) ? JSON.parse(localStorage.getItem($ctrl.selectedModifier)) : [];
+    $scope.$apply();
   }
 
   $ctrl.addMemo = function() {
@@ -206,6 +238,7 @@ Module.controller('TabbarController', ['$scope', function($scope) {
     $ctrl.notes.push(buyNote);
     localStorage.setItem('notes', JSON.stringify($ctrl.notes));
     $ctrl.selectedModifier = 'buyList';
+    $ctrl.buyItems = localStorage.getItem($ctrl.selectedModifier) ? JSON.parse(localStorage.getItem($ctrl.selectedModifier)) : [];
     $ctrl.memoName = "";
     noteInputDialog.hide();
   }
