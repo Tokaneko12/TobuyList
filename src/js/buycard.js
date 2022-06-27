@@ -2,7 +2,8 @@ Module.controller('buyCardController', ['$scope', '$rootScope', function($scope,
   var $ctrl = this;
   if(ons.platform.isIOS()) $ctrl.isIOS = true;
   $ctrl.firstOpen = true;
-  $ctrl.buyItems = localStorage.getItem('buyItems') ? JSON.parse(localStorage.getItem('buyItems')) : [];
+  $ctrl.selectedModifier = localStorage.getItem('selected') ? JSON.parse(localStorage.getItem('selected')) : [];
+  $ctrl.buyItems = localStorage.getItem($ctrl.selectedModifier) ? JSON.parse(localStorage.getItem($ctrl.selectedModifier)) : [];
   $ctrl.buyItemsCopy = localStorage.getItem('buyItems') ? angular.copy(JSON.parse(localStorage.getItem('buyItems'))) : [];
   $ctrl.cardNum = '';
 
@@ -26,7 +27,7 @@ Module.controller('buyCardController', ['$scope', '$rootScope', function($scope,
 
   // 戻るボタン処理
   $ctrl.backPage = function() {
-    localStorage.setItem('buyItems', JSON.stringify($ctrl.buyItems));
+    localStorage.setItem($ctrl.selectedModifier, JSON.stringify($ctrl.buyItems));
     $rootScope.$broadcast('updateItems');
     splitterNav.popPage();
   }

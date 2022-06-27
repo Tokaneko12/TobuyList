@@ -2,6 +2,7 @@ Module.controller('TabbarController', ['$scope', function($scope) {
   var $ctrl = this;
   $ctrl.selectedModifier = "buyList";
   var noteName = $ctrl.selectedModifier;
+  localStorage.setItem('selected', JSON.stringify($ctrl.selectedModifier));
   $ctrl.notes = localStorage.getItem('notes') ? JSON.parse(localStorage.getItem('notes')) : [];
   $ctrl.buyItems = localStorage.getItem($ctrl.selectedModifier) ? JSON.parse(localStorage.getItem($ctrl.selectedModifier)) : [];
   $ctrl.itemNum = "";
@@ -227,6 +228,7 @@ Module.controller('TabbarController', ['$scope', function($scope) {
       });
     }
     noteName = $ctrl.selectedModifier;
+    localStorage.setItem('selected', JSON.stringify($ctrl.selectedModifier));
     $ctrl.buyItems = localStorage.getItem($ctrl.selectedModifier) ? JSON.parse(localStorage.getItem($ctrl.selectedModifier)) : [];
     $scope.$apply();
   }
@@ -238,6 +240,7 @@ Module.controller('TabbarController', ['$scope', function($scope) {
     $ctrl.notes.push(buyNote);
     localStorage.setItem('notes', JSON.stringify($ctrl.notes));
     $ctrl.selectedModifier = 'buyList';
+    localStorage.setItem('selected', JSON.stringify($ctrl.selectedModifier));
     $ctrl.buyItems = localStorage.getItem($ctrl.selectedModifier) ? JSON.parse(localStorage.getItem($ctrl.selectedModifier)) : [];
     $ctrl.memoName = "";
     noteInputDialog.hide();
